@@ -1,0 +1,1 @@
+export const requestURI = "http://192.168.0.8:8080"

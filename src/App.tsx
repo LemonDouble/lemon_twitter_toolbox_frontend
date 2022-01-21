@@ -1,26 +1,44 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Main from "./pages/Main";
+import Login from "./pages/Login";
+import './App.css';
+
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/system";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const theme = createTheme({
+  typography:{
+    fontFamily:'Youth',
+  },
+});
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> 청소년체 테스트.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div id="App" css={style}>
+      <QueryClientProvider client = {queryClient}>
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
+            </BrowserRouter>
+          </ThemeProvider>
+        </QueryClientProvider>
     </div>
   );
 }
+
+const style = css({
+  backgroundColor: "#0a1929",
+  minHeight: "100vh",
+  color: "white"
+})
 
 export default App;
