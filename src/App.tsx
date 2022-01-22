@@ -9,6 +9,15 @@ import { css } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { ThemeProvider } from "@mui/system";
 import { QueryClient, QueryClientProvider } from "react-query";
+import TwitterOAuthHandler from "./pages/TwitterOAuthHandler";
+
+import {
+  RecoilRoot,
+  atom,
+  selector,
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 
 const theme = createTheme({
   typography:{
@@ -18,19 +27,24 @@ const theme = createTheme({
 
 const queryClient = new QueryClient();
 
+
+
 function App() {
   return (
     <div id="App" css={style}>
-      <QueryClientProvider client = {queryClient}>
-        <ThemeProvider theme={theme}>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Main />} />
-                <Route path="/login" element={<Login />} />
-              </Routes>
-            </BrowserRouter>
-          </ThemeProvider>
-        </QueryClientProvider>
+      <RecoilRoot>
+        <QueryClientProvider client = {queryClient}>
+          <ThemeProvider theme={theme}>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Main />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />}></Route>
+                </Routes>
+              </BrowserRouter>
+            </ThemeProvider>
+          </QueryClientProvider>
+        </RecoilRoot>
     </div>
   );
 }

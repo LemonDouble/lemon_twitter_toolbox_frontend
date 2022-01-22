@@ -1,28 +1,18 @@
 import { Button, Grid, Link, Typography } from "@mui/material";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import './Main.css';
-import {requestURI} from '../lib/serverData';
-import { useQuery } from "react-query";
-
-type RequestToken = {
-    token: string;
-    tokenSecret : string;
-    authorizationURL : string;
-    authenticationURL : string;
-}
+import useRequestToken from "../hooks/useRequestToken";
 
 export default function Main(){
-
     
-    const {isLoading, error, data } = useQuery<RequestToken, Error>('responseToken', async ():Promise<RequestToken> =>{
-        return await fetch(requestURI + "/api/oauth/request-token").then(
-            res => res.json()
-        )
-    })
-
+    const {isLoading, error, data } = useRequestToken();
 
     if(isLoading) return <>Loading..</>
-
+    
+    if(error){
+        alert("오류가 발생했습니다 : " + error.message);
+        return <> 으악 </>
+    }
 
     return (
         <>

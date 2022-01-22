@@ -19,6 +19,7 @@
     "react-query": "^3.34.11",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
+    "recoil": "^0.5.2",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
