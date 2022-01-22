@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { requestURI } from "../hooks/serverData";
-import useTwitterAuthToken from "../hooks/useTwitterAuthToken";
-
 
 export default function TwitterOAuthHandler(){
     const [searchParams] = useSearchParams();
@@ -13,7 +11,7 @@ export default function TwitterOAuthHandler(){
     const [isError, setIsError] = useState(false);
 
     useEffect(()=> {
-        fetch(requestURI + "/api/oauth/twitter-login-token",
+        fetch(requestURI + "/api/oauth/twitter-login",
         {
             method: "POST",
             headers:{
@@ -32,6 +30,7 @@ export default function TwitterOAuthHandler(){
                     setIsError(true);
                 }else{
                     setIsError(false);
+                    console.log(res);
                     localStorage.setItem('jwt', res);
                 }
             }
