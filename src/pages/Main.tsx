@@ -2,13 +2,9 @@ import { Button, Grid, Link, Typography } from "@mui/material";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import './Main.css';
 import useRequestToken from "../hooks/useRequestToken";
-import { useRecoilState } from "recoil";
-import { jwtState } from "../recoil/jwt";
 
 export default function Main(){
 
-    const [jwt, setJwt] = useRecoilState(jwtState)
-    
     const {isLoading, error, data } = useRequestToken();
 
     if(isLoading) return <>Loading..</>
@@ -17,6 +13,9 @@ export default function Main(){
         alert("오류가 발생했습니다 : " + error.message);
         return <> 으악 </>
     }
+
+    console.log(data);
+
 
     return (
         <>
@@ -40,7 +39,7 @@ export default function Main(){
                         <Button variant="contained"
                         size="large"
                         startIcon ={<TwitterIcon />}
-                        href ={data?.authenticationURL}
+                        href ={data?.authentication_url}
                         >트위터로 로그인</Button>
                         </Grid>
                     </Grid>

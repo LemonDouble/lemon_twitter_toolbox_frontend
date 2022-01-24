@@ -1,8 +1,7 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { requestURI } from "../hooks/serverData";
-import { jwtState } from "../recoil/jwt";
 
 export default function TwitterOAuthHandler(){
     const [searchParams] = useSearchParams();
@@ -11,35 +10,24 @@ export default function TwitterOAuthHandler(){
 
     const navigate = useNavigate();
 
-    const [jwt, setJwt] = useRecoilState(jwtState)
-
     useEffect(()=> {
-        fetch(requestURI + "/api/oauth/twitter-login",
+        axios.post("/api/oauth/twitter-login",
         {
-            method: "POST",
-            credentials: 'include',
-            headers:{
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
                 oauth_token : oauth_token,
                 oauth_verifier : oauth_verifier,
-            })
-        }
-        ).then(
-            res => res.json()
-        ).then(
+        }).then(
             (res) => {
-                if(res.hasOwnProperty('error')){
-                    alert("에러가 발생했습니다." + res.error);
-                    navigate("/");
-                }else{
                     alert("로그인 성공!");
-                    setJwt(res.token);
-                    navigate("/");
-                }
+                    // 로그인 이후엔 전송되는 헤더마다 JWT를 실어 보냄
+                    console.log(res.data.access_token);
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
+                    navigate("/mypage");
             }
-        )
+        ).catch((error) => {
+            alert("에러 발생!")
+            console.log(error);
+            navigate("/");
+        })
     }, [])
 
 

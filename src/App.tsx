@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
-import Login from "./pages/Login";
 import './App.css';
 
 /** @jsxImportSource @emotion/react */
@@ -13,12 +12,10 @@ import TwitterOAuthHandler from "./pages/TwitterOAuthHandler";
 
 import {
   RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
 } from 'recoil';
-import { jwtState } from "./recoil/jwt";
+import axios from "axios";
+import { requestURI } from "./hooks/serverData";
+import MyPage from "./pages/MyPage";
 
 const theme = createTheme({
   typography:{
@@ -28,7 +25,9 @@ const theme = createTheme({
 
 const queryClient = new QueryClient();
 
-
+axios.defaults.baseURL = requestURI;
+// 같은 Domain 사용할 경우 False로 바꿔도 됨
+axios.defaults.withCredentials = true;
 
 function App() {
 
@@ -41,7 +40,7 @@ function App() {
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Main />} />
-                  <Route path="/login" element={<Login />} />
+                  <Route path="/mypage" element={<MyPage />} />
                   <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />}></Route>
                 </Routes>
               </BrowserRouter>
