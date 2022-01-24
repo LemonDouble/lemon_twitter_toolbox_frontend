@@ -1,4 +1,4 @@
-import { CardContent, CardHeader, Typography, Card, CardActions, IconButton } from "@mui/material"
+import { CardContent, CardHeader, Typography, Card, CardActions, IconButton, Divider, Box } from "@mui/material"
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 
 export interface ErrorNoticeCardProps {
@@ -9,12 +9,18 @@ export default function ErrorNoticeCard({
     errorMessage = "뭔가 잘못된 것 같아요."
     }:ErrorNoticeCardProps){
     return(
-        <Card sx={{maxWidth : 600}}>
-            <CardHeader
-            title = "저런!">
-            </CardHeader>
+        <Card sx={{maxWidth : 600 ,height : "400px" ,display: "flex", flexDirection: "column", justifyContent:"space-between"}}>
+            <Box>
+                <CardHeader
+                title = "저런!"
+                titleTypographyProps={{
+                    variant:"h3"
+                    }}>
+                </CardHeader>
+                <Divider />
+            </Box>
             <CardContent>
-                <Typography variant="body1">
+                <Typography variant="h6">
                     {errorMessage}
                 </Typography>
             </CardContent>
