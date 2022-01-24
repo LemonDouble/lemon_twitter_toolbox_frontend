@@ -1,21 +1,32 @@
-import axios from "axios";
-import React, { useState } from "react";
-import { useQuery } from "react-query";
+import ErrorNoticeCard from "../components/ErrorNoticeCard";
+import UserShowCard from "../components/UserShowCard";
+import useServerProfile from "../hooks/useServerProfile";
+
 
 export default function MyPage(){
 
-    const { isLoading, error, data } = useQuery('profileURL', () =>
-     axios.get('/api/twitter/user-profile')
-   )
+    const { isLoading, error, data } = useServerProfile();
+
 
     if(isLoading) return <>Loading..</>
     
     if(error){
-        alert("오류가 발생했습니다 : " + error);
-        return <> 으악 </>
+        return <ErrorNoticeCard />
     }
 
+    console.log(`data = ${data}`);
+    console.log(`error = ${error}`);
 
-   console.log(data?.data);
-    return <div></div>
+    if(data){
+        return <div>
+        <UserShowCard 
+        profileImageUrlPath={data.profile_image_url}
+        UserName={data?.screen_name}
+        UserBio={data?.user_bio}
+        FollowingCount={10}
+        FollowerCount={100} />
+    </div>
+    }
+
+    return <ErrorNoticeCard />
 }

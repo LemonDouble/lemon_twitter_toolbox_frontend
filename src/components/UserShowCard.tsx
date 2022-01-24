@@ -1,6 +1,5 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import LogoutIcon from '@mui/icons-material/Logout';
 export interface UserShowCardProps {
     profileImageUrlPath : string;
     UserName: string;

@@ -29,8 +29,9 @@ axios.defaults.baseURL = requestURI;
 // 같은 Domain 사용할 경우 False로 바꿔도 됨
 axios.defaults.withCredentials = true;
 
-function App() {
+// 만약 response에 data 있다면 바로 꺼내와서 전달
 
+function App() {
 
   return (
     <div id="App" css={style}>

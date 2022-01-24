@@ -21,7 +21,7 @@ export default function Main(){
         <>
         <Grid container direction="row" justifyContent="center">
             <Grid item xs ={3}>
-                <img src="/img/toolboxLogo.png" />
+                <img src="/img/toolboxLogo.png" alt="service logo"/>
             </Grid>
             <Grid item lg = {5}>
                 <Grid container direction="column" justifyContent="flex-end"  alignItems="flex-end" rowSpacing="10px">
