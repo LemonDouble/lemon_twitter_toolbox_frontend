@@ -13,7 +13,11 @@ export type RequestToken = {
 export default function useRequestToken(){
 
     return useQuery<RequestToken, Error>('responseToken', async ():Promise<RequestToken> =>{
-        return await fetch(requestURI + "/api/oauth/request-token").then(
+        return await fetch(
+            requestURI + "/api/oauth/request-token",{
+                credentials: 'include',
+            }
+            ).then(
             res => res.json()
         )
     })

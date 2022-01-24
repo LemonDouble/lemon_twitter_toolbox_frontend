@@ -18,6 +18,7 @@ import {
   useRecoilState,
   useRecoilValue,
 } from 'recoil';
+import { jwtState } from "./recoil/jwt";
 
 const theme = createTheme({
   typography:{
@@ -30,6 +31,8 @@ const queryClient = new QueryClient();
 
 
 function App() {
+
+
   return (
     <div id="App" css={style}>
       <RecoilRoot>

@@ -2,8 +2,12 @@ import { Button, Grid, Link, Typography } from "@mui/material";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import './Main.css';
 import useRequestToken from "../hooks/useRequestToken";
+import { useRecoilState } from "recoil";
+import { jwtState } from "../recoil/jwt";
 
 export default function Main(){
+
+    const [jwt, setJwt] = useRecoilState(jwtState)
     
     const {isLoading, error, data } = useRequestToken();
 

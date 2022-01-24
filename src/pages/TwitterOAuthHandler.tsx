@@ -1,19 +1,23 @@
-import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { requestURI } from "../hooks/serverData";
+import { jwtState } from "../recoil/jwt";
 
 export default function TwitterOAuthHandler(){
     const [searchParams] = useSearchParams();
     const oauth_token = searchParams.get('oauth_token');
     const oauth_verifier = searchParams.get('oauth_verifier');
 
-    const [isError, setIsError] = useState(false);
+    const navigate = useNavigate();
+
+    const [jwt, setJwt] = useRecoilState(jwtState)
 
     useEffect(()=> {
         fetch(requestURI + "/api/oauth/twitter-login",
         {
             method: "POST",
+            credentials: 'include',
             headers:{
                 'Content-Type': 'application/json'
             },
@@ -27,11 +31,12 @@ export default function TwitterOAuthHandler(){
         ).then(
             (res) => {
                 if(res.hasOwnProperty('error')){
-                    setIsError(true);
+                    alert("에러가 발생했습니다." + res.error);
+                    navigate("/");
                 }else{
-                    setIsError(false);
-                    console.log(res);
-                    localStorage.setItem('jwt', res);
+                    alert("로그인 성공!");
+                    setJwt(res.token);
+                    navigate("/");
                 }
             }
         )
