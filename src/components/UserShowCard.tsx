@@ -36,15 +36,14 @@ export default function UserShowCard({
 
     
     return(
-        <Card sx = {{display:'flex', minWidth:"500px", minHeight:"250px", alignItems:"center"}}>
-            <Box sx={{width:"10px"}}></Box>
+        <Card sx = {{display:'flex', height:"200px" ,justifyContent:"center", alignItems:"center"}}>
             <CardMedia
             component="img"
-            sx={{width: "200px", height:"200px", borderRadius:"50%"}}
+            sx={{width: "25%", borderRadius:"50%"}}
             image={profileImageUrlPath}
             alt="user profile image"
             />
-            <CardContent sx ={{width:"290px"}}>
+            <CardContent sx ={{width:"60%"}}>
                 <Box sx= {{display: 'flex', flexDirection: "column", alignItems:"center"}}>
                     <Typography variant="h6" align="center">
                         {shortedUserName}

@@ -1,4 +1,4 @@
-import { Button, Grid, Link, Typography } from "@mui/material";
+import { Avatar, Button, Grid, Link, Typography } from "@mui/material";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import './Main.css';
 import useRequestToken from "../hooks/useRequestToken";
@@ -21,14 +21,19 @@ export default function Main(){
 
     return (
         <>
-        <Grid container direction="row" justifyContent="center">
-            <Grid item xs ={3}>
-                <img src="/img/toolboxLogo.png" alt="service logo"/>
+        <Grid container direction="row" justifyContent="center" spacing={3}>
+            <Grid item lg ={4} md ={4} sm ={8} xs ={8}>
+                <Avatar
+                alt = "service logo"
+                src = "/img/toolboxLogo.png"
+                variant ="square"
+                sx ={{width: "80%", height: "80%"}}>
+                </Avatar>
             </Grid>
-            <Grid item lg = {5}>
+            <Grid item lg = {5} md ={5} sm ={10} xs = {10}>
                 <Grid container direction="column" justifyContent="flex-end"  alignItems="flex-end" rowSpacing="10px">
                     <Grid item lg={3}>
-                    <Typography variant="h1"> LEMON TOOLBOX </Typography>
+                    <Typography variant="h2"> LEMON TOOLBOX </Typography>
                     </Grid>
                     <Grid item lg={2}>
                     <Typography variant="subtitle1"> 재미있는 여러 트위터 확장 기능을 로그인 한 번에 간편하게</Typography>
@@ -56,14 +61,15 @@ export default function Main(){
                     </Grid>
                 </Grid>
             </Grid>
+            <Grid item sx={{display : {sm : "none", xs:"none"}}}>
+                <section>
+                <div className="wave water"></div>
+                <div className="wave water"></div>
+                <div className="wave water"></div>
+                <div className="wave water"></div>
+                </section>
+            </Grid>
         </Grid>
-
-        <section>
-            <div className="wave water"></div>
-            <div className="wave water"></div>
-            <div className="wave water"></div>
-            <div className="wave water"></div>
-        </section>
         </>
     )
 }
