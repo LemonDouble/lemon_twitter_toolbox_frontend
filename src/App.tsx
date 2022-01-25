@@ -1,12 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import './App.css';
 
-/** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react";
-import { createTheme } from "@mui/material/styles";
-import { ThemeProvider } from "@mui/system";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "react-query";
 import TwitterOAuthHandler from "./pages/TwitterOAuthHandler";
 
@@ -16,12 +13,7 @@ import {
 import axios from "axios";
 import { requestURI } from "./hooks/serverData";
 import MyPage from "./pages/MyPage";
-
-const theme = createTheme({
-  typography:{
-    fontFamily:'Youth',
-  },
-});
+import { Box } from "@mui/material";
 
 const queryClient = new QueryClient();
 
@@ -29,15 +21,27 @@ axios.defaults.baseURL = requestURI;
 // 같은 Domain 사용할 경우 False로 바꿔도 됨
 axios.defaults.withCredentials = true;
 
-// 만약 response에 data 있다면 바로 꺼내와서 전달
-
 function App() {
 
+  useEffect(()=> {
+    const acces_token = localStorage.getItem("token");
+    axios.defaults.headers.common['Authorization'] = `Bearer ${acces_token}`;
+  })
+
   return (
-    <div id="App" css={style}>
-      <RecoilRoot>
-        <QueryClientProvider client = {queryClient}>
-          <ThemeProvider theme={theme}>
+    <>
+        <Box sx = {{
+          width:'100vw',
+          minHeight :'100vh',
+          bgcolor: 'background.default',
+          color: 'text.primary',
+          display: 'flex',
+          flexDirection : 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <RecoilRoot>
+            <QueryClientProvider client = {queryClient}>
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Main />} />
@@ -45,17 +49,41 @@ function App() {
                   <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />}></Route>
                 </Routes>
               </BrowserRouter>
-            </ThemeProvider>
-          </QueryClientProvider>
-        </RecoilRoot>
-    </div>
+            </QueryClientProvider>
+          </RecoilRoot>
+        </Box>
+    </>
   );
 }
 
-const style = css({
-  backgroundColor: "#0a1929",
-  minHeight: "100vh",
-  color: "white"
-})
+export const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
-export default App;
+export function ToggleColorModeApp(){
+  const [mode, setMode] = React.useState<'light' | 'dark'>('dark');
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
+      },
+    }),
+    [],
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode],
+  );
+
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}

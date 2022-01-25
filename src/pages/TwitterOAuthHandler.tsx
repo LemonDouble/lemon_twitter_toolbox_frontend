@@ -33,6 +33,8 @@ export default function TwitterOAuthHandler(){
         navigate("/");
     }
 
+
+    // TODO : Local Stoarge 보안상 안 좋으므로, 꼭 Refresh Token / Access Token으로 바꾸자.
     if(data){
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`;
         localStorage.setItem("token", data.access_token);

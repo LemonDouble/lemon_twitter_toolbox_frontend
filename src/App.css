@@ -2,12 +2,3 @@
   font-family: 'Youth';
   src: url(./fonts/Youth.ttf);
 }
-
-#App{
-  background-color: #0a1929;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
