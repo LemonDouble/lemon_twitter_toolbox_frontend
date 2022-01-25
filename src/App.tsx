@@ -75,6 +75,9 @@ export function ToggleColorModeApp(){
         palette: {
           mode,
         },
+        typography:{
+          fontFamily: 'Youth',
+        }
       }),
     [mode],
   );
