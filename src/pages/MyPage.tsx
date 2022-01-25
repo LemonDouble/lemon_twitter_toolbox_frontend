@@ -1,8 +1,16 @@
-import { Box, Divider, Grid, Paper, Typography } from "@mui/material";
+import { Box, Divider, Grid, Paper, styled, Typography } from "@mui/material";
+import CompactProductionShowCard from "../components/CompactProductionShowCard";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
 import MenuBarWithoutNotification from "../components/MenuBarWithoutNotification";
 import UserShowCard from "../components/UserShowCard";
 import useServerProfile from "../hooks/useServerProfile";
+
+const Item = styled(Paper)(({ theme }) => ({
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
 
 
 export default function MyPage(){
@@ -31,8 +39,7 @@ export default function MyPage(){
                 }}>
                     <Grid item lg ={4} md ={4} sm ={10} xs ={10}
                     sx={{height:"100%"}}>
-                        <Grid container direction="column" justifyContent="space-between" sx={{
-                            maxWidth: "500px",height:"100%"}}>
+                        <Grid container direction="column" justifyContent="space-between" sx={{height:"100%"}}>
                             <Grid item>
                                 <Typography variant="h5"> 로그인 중인 사용자 : </Typography>
                                 <Divider />
@@ -49,16 +56,25 @@ export default function MyPage(){
                     </Grid>
                     <Grid item lg ={6} md ={6} sm ={10} xs ={10}
                     sx ={{height:"100%"}}>
-                        <Grid container direction="column" justifyContent="space-between" sx={{ width: "inherit" ,height:"100%"}}>
+                        <Grid container direction="column" justifyContent="space-between" sx={{height:"100%"}}>
                             <Grid item>
                                 <Typography variant="h5"> 현재 사용중인 서비스 : </Typography>
                                 <Divider />
                             </Grid>
                             <Grid item>
-                                <Paper variant="outlined" sx={{
-                                    width:"inherit",
-                                    height:"200px",
-                                }}/>
+                                <Paper sx ={{height:"200px"}}>
+                                    <Grid container spacing={2} justifyContent="center">
+                                        <Grid item xs={5.5}>
+                                            <CompactProductionShowCard cardLogoImgPath="/img/robot.svg"
+  cardTitle= "도플갱어 만들기"
+  cardContent= "자신의 트윗을 바탕으로 도플갱어를 만들어 보세요!"
+  cardURL= "/login" />
+                                        </Grid>
+                                        <Grid item xs={5.5}>
+                                            <Item>xs=4</Item>
+                                        </Grid>
+                                    </Grid>
+                                </Paper>
                             </Grid>
                         </Grid>
                     </Grid>

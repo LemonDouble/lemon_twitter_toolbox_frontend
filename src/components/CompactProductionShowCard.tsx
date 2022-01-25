@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import { Box } from '@mui/material';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 
 export interface CompactProductionShowCardProps {
     cardLogoImgPath : string;
@@ -24,14 +24,14 @@ export default function CompactProductionShowCard({
 }: CompactProductionShowCardProps) {
 
   return (
-    <Card sx={{ maxWidth: 345 , verticalAlign: 'center'}}>
+    <Card sx={{verticalAlign: 'center'}}>
       <CardHeader
         avatar={
-          <Avatar src={cardLogoImgPath} aria-label="productLogo" />
+          <SmartToyIcon />
         }
         title={cardTitle}
         titleTypographyProps={{
-          variant:"h6"
+          variant:"body1"
         }}
         action={
           <IconButton aria-label="settings" href={cardURL}>

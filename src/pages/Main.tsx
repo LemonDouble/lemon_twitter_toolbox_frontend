@@ -22,7 +22,7 @@ export default function Main(){
     return (
         <>
         <Grid container direction="row" justifyContent="center" spacing={3}>
-            <Grid item lg ={4} md ={4} sm ={8} xs ={8}>
+            <Grid item xl={3} lg ={4} md ={4} sm ={8} xs ={8}>
                 <Avatar
                 alt = "service logo"
                 src = "/img/toolboxLogo.png"
@@ -30,7 +30,7 @@ export default function Main(){
                 sx ={{width: "80%", height: "80%"}}>
                 </Avatar>
             </Grid>
-            <Grid item lg = {5} md ={5} sm ={10} xs = {10}>
+            <Grid item xl= {4} lg = {5} md ={5} sm ={10} xs = {10}>
                 <Grid container direction="column" justifyContent="flex-end"  alignItems="flex-end" rowSpacing="10px">
                     <Grid item lg={3}>
                     <Typography variant="h2"> LEMON TOOLBOX </Typography>
@@ -61,7 +61,7 @@ export default function Main(){
                     </Grid>
                 </Grid>
             </Grid>
-            <Grid item sx={{display : {sm : "none", xs:"none"}}}>
+            <Grid item sx={{display : {xl:"block", lg:"block", md:"block", sm : "none", xs:"none"}}}>
                 <section>
                 <div className="wave water"></div>
                 <div className="wave water"></div>
