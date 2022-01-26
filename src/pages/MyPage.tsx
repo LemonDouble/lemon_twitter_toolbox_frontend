@@ -1,16 +1,8 @@
-import { Box, Divider, Grid, Paper, styled, Typography } from "@mui/material";
-import CompactProductionShowCard from "../components/CompactProductionShowCard";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
 import MenuBarWithoutNotification from "../components/MenuBarWithoutNotification";
 import UserShowCard from "../components/UserShowCard";
 import useServerProfile from "../hooks/useServerProfile";
-
-const Item = styled(Paper)(({ theme }) => ({
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  color: theme.palette.text.secondary,
-}));
 
 
 export default function MyPage(){
@@ -62,19 +54,7 @@ export default function MyPage(){
                                 <Divider />
                             </Grid>
                             <Grid item>
-                                <Paper sx ={{height:"200px"}}>
-                                    <Grid container spacing={2} justifyContent="center">
-                                        <Grid item xs={5.5}>
-                                            <CompactProductionShowCard cardLogoImgPath="/img/robot.svg"
-  cardTitle= "도플갱어 만들기"
-  cardContent= "자신의 트윗을 바탕으로 도플갱어를 만들어 보세요!"
-  cardURL= "/login" />
-                                        </Grid>
-                                        <Grid item xs={5.5}>
-                                            <Item>xs=4</Item>
-                                        </Grid>
-                                    </Grid>
-                                </Paper>
+                                {/*<UsingServiceNoticeBoard />*/}
                             </Grid>
                         </Grid>
                     </Grid>

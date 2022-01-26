@@ -7,9 +7,9 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
 
-export interface CompactProductionShowCardProps {
+export interface ServiceShowCardProps {
+    serviceName : string;
     cardLogoImgPath : string;
     cardTitle: string;
     cardContent : string;
@@ -17,28 +17,36 @@ export interface CompactProductionShowCardProps {
 }
 
 
-export default function CompactProductionShowCard({
+export default function ServiceShowCard({
+    serviceName,
     cardLogoImgPath,
     cardTitle,
+    cardContent,
     cardURL,
-}: CompactProductionShowCardProps) {
+}: ServiceShowCardProps) {
 
   return (
-    <Card sx={{verticalAlign: 'center'}}>
+    <Card sx={{ maxWidth: 345 }}>
       <CardHeader
         avatar={
-          <SmartToyIcon />
+          <Avatar src={cardLogoImgPath} aria-label="productLogo" />
         }
         title={cardTitle}
         titleTypographyProps={{
-          variant:"body1"
+          variant:"h4"
         }}
-        action={
-          <IconButton aria-label="settings" href={cardURL}>
-            <DoubleArrowIcon />
-          </IconButton>
-          }
       />
+      <CardContent>
+        <Typography color="text.secondary" variant='body2'>
+          {cardContent}
+        </Typography>
+      </CardContent>
+      <CardActions sx={{display:"flex", justifyContent:"flex-end"}}>
+        <IconButton aria-label="move" size="small">
+            바로 사용해보기!
+            <DoubleArrowIcon />
+        </IconButton>
+      </CardActions>
     </Card>
   );
 }
