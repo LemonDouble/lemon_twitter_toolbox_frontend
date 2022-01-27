@@ -3,14 +3,13 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-
+import SvgIcon from '@mui/icons-material/DoubleArrow';
 export interface ServiceShowCardProps {
     serviceName : string;
-    cardLogoImgPath : string;
+    Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement> & {title?: string | undefined;}>
     cardTitle: string;
     cardContent : string;
     cardURL : string;
@@ -19,7 +18,7 @@ export interface ServiceShowCardProps {
 
 export default function ServiceShowCard({
     serviceName,
-    cardLogoImgPath,
+    Icon,
     cardTitle,
     cardContent,
     cardURL,
@@ -29,7 +28,7 @@ export default function ServiceShowCard({
     <Card sx={{ height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
       <CardHeader
         avatar={
-          <Avatar src={cardLogoImgPath} aria-label="serviceLogo" />
+          <SvgIcon component={Icon} inheritViewBox />
         }
         title={cardTitle}
         titleTypographyProps={{

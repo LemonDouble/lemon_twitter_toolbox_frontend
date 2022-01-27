@@ -46,7 +46,7 @@ export default function UsingServiceNoticeBoard({UsingServiceArray}:UsingService
                     <CompactServiceShowCard
                     key ={index}
                     serviceName={item.serviceName}
-                    cardLogoImgPath={item.cardLogoImgPath}
+                    Icon={item.Icon}
                     cardTitle={item.cardTitle}
                     cardURL={item.cardURL}
                     />

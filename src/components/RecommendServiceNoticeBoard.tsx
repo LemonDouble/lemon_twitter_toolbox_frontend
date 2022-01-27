@@ -42,7 +42,7 @@ export default function RecommendServiceNoticeBoard({UsingServiceArray}:Recommen
                     <ServiceShowCard
                     key ={index}
                     serviceName={item.serviceName}
-                    cardLogoImgPath={item.cardLogoImgPath}
+                    Icon={item.Icon}
                     cardTitle={item.cardTitle}
                     cardContent={item.cardContent}
                     cardURL={item.cardURL}
