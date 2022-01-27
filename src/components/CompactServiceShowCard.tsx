@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import IconButton from '@mui/material/IconButton';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
+import { Icon } from '@mui/material';
 
 export interface CompactServiceShowCardProps {
     serviceName : string;
@@ -23,7 +23,7 @@ export default function CompactServiceShowCard({
     <Card sx={{verticalAlign: 'center'}}>
       <CardHeader
         avatar={
-          <SmartToyIcon />
+          <Icon> </Icon>
         }
         title={cardTitle}
         titleTypographyProps={{

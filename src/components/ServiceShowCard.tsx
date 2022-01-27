@@ -29,7 +29,7 @@ export default function ServiceShowCard({
     <Card sx={{ height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
       <CardHeader
         avatar={
-          <Avatar src={cardLogoImgPath} aria-label="productLogo" />
+          <Avatar src={cardLogoImgPath} aria-label="serviceLogo" />
         }
         title={cardTitle}
         titleTypographyProps={{
