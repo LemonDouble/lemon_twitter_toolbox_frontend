@@ -10,7 +10,7 @@ export interface MenuBarWithoutNotificationProps {
 }
 
 
-export default function MenuBarWithoutNotification(){
+export default function MenuBarWithoutNotification({}:MenuBarWithoutNotificationProps){
 
     const navigate = useNavigate();
 

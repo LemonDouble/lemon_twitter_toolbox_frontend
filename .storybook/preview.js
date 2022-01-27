@@ -1,5 +1,6 @@
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { ThemeProvider as Emotion10ThemeProvider } from 'emotion-theming';
+import { MemoryRouter } from "react-router-dom";
 
 const defaultTheme = createTheme({
   typography:{
@@ -15,7 +16,10 @@ const withThemeProvider = (Story, context) => {
     </Emotion10ThemeProvider>
   );
 };
-export const decorators = [withThemeProvider];
+
+const MemoryRouters = (Story) => <MemoryRouter><Story /></MemoryRouter>
+
+export const decorators = [withThemeProvider, MemoryRouters];
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
