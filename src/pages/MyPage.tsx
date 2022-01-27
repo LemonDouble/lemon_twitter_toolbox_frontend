@@ -26,9 +26,9 @@ export default function MyPage(){
             <Grid sx ={{
                 width: "100vw",
                 height: "100vh",
-                overflowY:"scroll"
+                overflowY:"scroll",
             }}>
-                <MenuBarWithoutNotification></MenuBarWithoutNotification>
+                <MenuBarWithoutNotification />
                 <Box sx = {{height:"20px"}}></Box>
                 <Grid container spacing={3} direction="row" 
                 sx={{

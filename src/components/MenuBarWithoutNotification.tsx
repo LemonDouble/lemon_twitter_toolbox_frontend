@@ -6,6 +6,7 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import React from "react";
 import { ColorModeContext } from "../App";
 import { useNavigate } from "react-router-dom";
+
 export interface MenuBarWithoutNotificationProps {
 }
 
@@ -29,7 +30,7 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
 
     return(
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
+            <AppBar position="fixed">
                 <Toolbar>
                     <IconButton
                         size="large"
@@ -101,6 +102,7 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                     </Box>
                 </Toolbar>
             </AppBar>
+            <Toolbar />
         </Box>
     )
 }
