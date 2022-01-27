@@ -21,7 +21,7 @@ export default function CompactServiceShowCard({
 
 
   return (
-    <Card sx={{verticalAlign: 'center'}}>
+    <Card elevation={3} sx={{verticalAlign: 'center'}}>
       <CardHeader
         avatar={
           <SvgIcon component={Icon} inheritViewBox />

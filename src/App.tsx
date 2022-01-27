@@ -14,6 +14,7 @@ import axios from "axios";
 import { requestURI } from "./hooks/serverData";
 import MyPage from "./pages/MyPage";
 import { Box, useMediaQuery } from "@mui/material";
+import LogoutHander from "./pages/LogoutHandler";
 
 const queryClient = new QueryClient();
 
@@ -60,7 +61,8 @@ function App() {
                 <Routes>
                   <Route path="/" element={<Main />} />
                   <Route path="/mypage" element={<MyPage />} />
-                  <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />}></Route>
+                  <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />} />
+                  <Route path="/logout" element={<LogoutHander />} />
                 </Routes>
               </BrowserRouter>
             </QueryClientProvider>

@@ -27,5 +27,5 @@ export const AllServiceList = atom<ServiceShowCardProps[]>({
         cardTitle : "팔로워 추적기",
         cardContent : "주기적으로 누가 팔로우했는지, 누가 언팔로우했는지 알려줘요! 계폭한 사람이 누군지 이제 고민할 필요 없어요!",
         cardURL : "/FollowerTracker"
-    }]
+    },]
 })

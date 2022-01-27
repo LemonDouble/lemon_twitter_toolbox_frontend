@@ -1,16 +1,32 @@
-import { AppBar, Badge, Box, IconButton, Menu, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useState } from "react";
-import MenuIcon from '@mui/icons-material/Menu';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { AccountCircle } from "@mui/icons-material";
-
+import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import React from "react";
+import { ColorModeContext } from "../App";
+import { useNavigate } from "react-router-dom";
 export interface MenuBarWithoutNotificationProps {
 }
 
 
-export default function MenuBarWithoutNotification({}:MenuBarWithoutNotificationProps){
-    const [anchorEl , setAnchorEl] = useState<null | HTMLElement>(null);
-    
+export default function MenuBarWithoutNotification(){
+
+    const navigate = useNavigate();
+
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
+    const UserMenu = [{name : 'My Page', url : '/mypage'}, {name : 'Logout', url : '/logout'}];
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+
+
+    const colorMode = React.useContext(ColorModeContext);
+
+
     return(
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
@@ -19,10 +35,11 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                         size="large"
                         edge="start"
                         color="inherit"
-                        aria-label="open drawer"
+                        aria-label="page logo"
                         sx={{ mr: 2 }}
+                        onClick={() => navigate("/mypage")}
                     >
-                        <MenuIcon />
+                        <HomeRepairServiceIcon />
                     </IconButton>
 
                     <Typography
@@ -33,18 +50,54 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                         Lemon Toolbox
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
+
                     <Box>
-                        <IconButton
-                        size="large"
-                        edge="end"
-                        aria-label="account of current user"
-                        aria-controls={""}
-                        aria-haspopup="true"
-                        onClick={()=> {}}
-                        color="inherit"
+                        <Tooltip title="Toggle dark mode">
+                            <IconButton
+                            size="large"
+                            aria-label="turn on/off dark mode"
+                            color="inherit"
+                            onClick={colorMode.toggleColorMode}
+                            >
+                                <DarkModeIcon />
+                            </IconButton>
+                        </Tooltip>
+                        
+                        <Tooltip title="Open User Menu">
+                            <IconButton
+                            size="large"
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={""}
+                            aria-haspopup="true"
+                            onClick={handleOpenUserMenu}
+                            color="inherit"
+                            >
+                                <AccountCircle />
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                        sx={{ mt : '45px'}}
+                        id="menu-userbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                            vertical:'top',
+                            horizontal:'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical:'top',
+                            horizontal:'right'
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
                         >
-                        <AccountCircle />
-                        </IconButton>
+                            {UserMenu.map((menu) =>(
+                                <MenuItem key={menu.name} onClick={() => navigate(menu.url)}>
+                                    <Typography textAlign="center">{menu.name}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
                     </Box>
                 </Toolbar>
             </AppBar>

@@ -67,7 +67,7 @@ export default function MyPage(){
                         </Grid>
                     </Grid>
 
-                    <Grid item lg ={10} md ={10} sm ={10} xs ={10} sx ={{height:"100%"}}>
+                    <Grid item lg ={10} md ={10} sm ={10} xs ={10}>
                         <Grid container direction="column" justifyContent="space-between" sx={{height:"100%",display:"flex"}}>
                             <Grid container direction="column" item sx={{height:"40px"}}>
                                 <Typography variant="h5"> 이런 서비스는 어떠세요? : </Typography>

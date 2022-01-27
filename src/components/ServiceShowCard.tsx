@@ -25,7 +25,7 @@ export default function ServiceShowCard({
 }: ServiceShowCardProps) {
 
   return (
-    <Card sx={{ height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
+    <Card elevation={3} sx={{ height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between",}}>
       <CardHeader
         avatar={
           <SvgIcon component={Icon} inheritViewBox />
