@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Main from "./pages/Main";
 import './App.css';
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Breakpoint, createTheme, Theme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { QueryClient, QueryClientProvider } from "react-query";
 import TwitterOAuthHandler from "./pages/TwitterOAuthHandler";
 
@@ -13,13 +13,27 @@ import {
 import axios from "axios";
 import { requestURI } from "./hooks/serverData";
 import MyPage from "./pages/MyPage";
-import { Box } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 
 const queryClient = new QueryClient();
 
 axios.defaults.baseURL = requestURI;
 // 같은 Domain 사용할 경우 False로 바꿔도 됨
 axios.defaults.withCredentials = true;
+
+type BreakpointOrNull = Breakpoint | null;
+
+export function useWidth() {
+  const theme: Theme = useTheme();
+  const keys: readonly Breakpoint[] = [...theme.breakpoints.keys].reverse();
+  return (
+    keys.reduce((output: BreakpointOrNull, key: Breakpoint) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const matches = useMediaQuery(theme.breakpoints.up(key));
+      return !output && matches ? key : output;
+    }, null) || 'xs'
+  );
+}
 
 function App() {
 

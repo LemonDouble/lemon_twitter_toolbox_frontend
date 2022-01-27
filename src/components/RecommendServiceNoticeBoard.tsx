@@ -1,16 +1,14 @@
 import { Grid, Paper } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useWidth } from "../App";
-import CompactServiceShowCard from "./CompactServiceShowCard";
-import { ServiceShowCardProps } from "./ServiceShowCard";
+import ServiceShowCard, { ServiceShowCardProps } from "./ServiceShowCard";
 
-export interface UsingServiceNoticeBoardProps {
+export interface RecommendServiceNoticeBoardProps {
     UsingServiceArray : ServiceShowCardProps[],
-
 }
 
 
-export default function UsingServiceNoticeBoard({UsingServiceArray}:UsingServiceNoticeBoardProps){    
+export default function RecommendServiceNoticeBoard({UsingServiceArray}:RecommendServiceNoticeBoardProps){
 
     // Media Query (가로 길이) 에 따라서 보이는 개수를 수정한다.
     const [showServiceCard, setshowServiceCard] =useState<ServiceShowCardProps[]>([]);
@@ -20,13 +18,13 @@ export default function UsingServiceNoticeBoard({UsingServiceArray}:UsingService
     useEffect(()=> {
         switch(width){
             case "xl":
-                // xl은 최대 6개까지 가능, 단, 마지막 한 칸은 더 보기.. 자리이므로 최대 5개까지
-                setshowServiceCard(UsingServiceArray.slice(0,5))
+                // xl은 최대 3개까지 가능, 단, 마지막 한 칸은 더 보기.. 자리이므로 최대 5개까지
+                setshowServiceCard(UsingServiceArray.slice(0,3))
                 break;
             case "lg":
             case "md":
                 // lg, md는 2개까지
-                setshowServiceCard(UsingServiceArray.slice(0,3))
+                setshowServiceCard(UsingServiceArray.slice(0,2))
                 break;
             case "sm":
             case "xs":
@@ -35,19 +33,18 @@ export default function UsingServiceNoticeBoard({UsingServiceArray}:UsingService
         }
     }, [UsingServiceArray, width])
 
-    
-    return (
+    return(
         <Paper component={Grid} container item>
-            <Grid container item alignContent="flex-start" spacing={2} p="10px">
+            <Grid container item justifyContent="center" alignContent="center"
+            spacing={2} p="10px">
                 {showServiceCard.map((item, index) => (
-                <Grid item key={index}
-                xl={4} lg={6} md = {6} sm={12} xs={12} 
-                >
-                    <CompactServiceShowCard
+                <Grid item key ={index} xl={4} lg={6} md = {6} sm={12} xs={12}>
+                    <ServiceShowCard
                     key ={index}
                     serviceName={item.serviceName}
                     cardLogoImgPath={item.cardLogoImgPath}
                     cardTitle={item.cardTitle}
+                    cardContent={item.cardContent}
                     cardURL={item.cardURL}
                     />
                 </Grid>
@@ -55,5 +52,5 @@ export default function UsingServiceNoticeBoard({UsingServiceArray}:UsingService
                 }
             </Grid>
         </Paper>
-        )
+    )
 }

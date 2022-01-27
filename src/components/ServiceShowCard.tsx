@@ -26,7 +26,7 @@ export default function ServiceShowCard({
 }: ServiceShowCardProps) {
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between"}}>
       <CardHeader
         avatar={
           <Avatar src={cardLogoImgPath} aria-label="productLogo" />
@@ -42,7 +42,7 @@ export default function ServiceShowCard({
         </Typography>
       </CardContent>
       <CardActions sx={{display:"flex", justifyContent:"flex-end"}}>
-        <IconButton aria-label="move" size="small">
+        <IconButton aria-label="move" size="small" href={cardURL}>
             바로 사용해보기!
             <DoubleArrowIcon />
         </IconButton>

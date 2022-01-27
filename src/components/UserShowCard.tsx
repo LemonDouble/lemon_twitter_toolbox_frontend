@@ -1,5 +1,6 @@
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+
 export interface UserShowCardProps {
     profileImageUrlPath : string;
     UserName: string;
@@ -25,7 +26,7 @@ export default function UserShowCard({
         }
 
         if(UserBio.length > 50){
-            setShortedUserBio(UserBio.substring(0, 100) + "...");
+            setShortedUserBio(UserBio.substring(0, 50) + "...");
         }else{
             setShortedUserBio(UserBio);
         }
@@ -36,7 +37,7 @@ export default function UserShowCard({
 
     
     return(
-        <Card sx = {{display:'flex', height:"200px" ,justifyContent:"center", alignItems:"center"}}>
+        <Card sx = {{height:"100%", display:'flex', justifyContent:"center", alignItems:"center"}}>
             <CardMedia
             component="img"
             sx={{width: "25%", borderRadius:"50%"}}

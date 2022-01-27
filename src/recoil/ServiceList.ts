@@ -3,8 +3,8 @@ import { ServiceShowCardProps } from "../components/ServiceShowCard";
 
 
 
-const ServiceList = atom<ServiceShowCardProps[]>({
-    key : 'ServiceList',
+export const AllServiceList = atom<ServiceShowCardProps[]>({
+    key : 'AllServiceList',
     default : [{
         serviceName : "LearnMe",
         cardLogoImgPath : "/img/services/robot.svg",

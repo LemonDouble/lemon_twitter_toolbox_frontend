@@ -4,6 +4,7 @@ import './Main.css';
 import useRequestToken from "../hooks/useRequestToken";
 import React from "react";
 import { ColorModeContext } from "../App";
+import ErrorNoticeCard from "../components/ErrorNoticeCard";
 
 
 export default function Main(){
@@ -16,7 +17,7 @@ export default function Main(){
     
     if(error){
         alert("오류가 발생했습니다 : " + error.message);
-        return <> 으악 </>
+        return <ErrorNoticeCard />
     }
 
     return (
