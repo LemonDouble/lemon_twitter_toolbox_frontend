@@ -6,12 +6,16 @@ import SendIcon from '@mui/icons-material/Send';
 import React from "react";
 import LeftImageIntroduceCard from "../../components/LeftImageIntroduceCard";
 import RightImageIntroduceCard from "../../components/RightImageIntroduceCard";
+import axios from "axios";
+import { Mutation, useMutation } from "react-query";
 
 export interface LearnMeProps {
 }
 
 
 export default function LearnMeIntroduce({}:LearnMeProps){
+
+    const mutation = useMutation(() => axios.post("/api/twitter/service/learn_me"))
 
     const [loading, setLoading] = React.useState(false);
     function handleClick() {
@@ -45,9 +49,9 @@ export default function LearnMeIntroduce({}:LearnMeProps){
                         </Grid>
                         <Grid container item justifyContent="center">
                             <LoadingButton
-                            onClick={handleClick}
+                            onClick={()=> mutation.mutate()}
                             endIcon={<SendIcon />}
-                            loading={loading}
+                            loading={mutation.isLoading}
                             loadingPosition="end"
                             variant="contained"
                             >
