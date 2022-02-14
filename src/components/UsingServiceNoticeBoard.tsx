@@ -1,4 +1,4 @@
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useWidth } from "../App";
 import CompactServiceShowCard from "./CompactServiceShowCard";
@@ -35,7 +35,18 @@ export default function UsingServiceNoticeBoard({UsingServiceArray}:UsingService
         }
     }, [UsingServiceArray, width])
 
-    
+    if(showServiceCard.length === 0 ){
+        return (
+        <Paper component={Grid} container item sx={{
+            alignItems:"center",
+            justifyContent:"center"
+        }}>
+            <Typography variant="h6">아직 가입한 서비스가 없어요!</Typography>
+        </Paper>
+        )
+    }
+
+
     return (
         <Paper component={Grid} container item>
             <Grid container item alignContent="flex-start" spacing={2} p="10px">

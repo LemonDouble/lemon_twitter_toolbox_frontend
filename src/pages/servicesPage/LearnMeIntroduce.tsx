@@ -3,11 +3,11 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import MenuBarWithoutNotification from "../../components/MenuBarWithoutNotification";
 import ResponsiveIntroduceImageContainer from "../../components/ResponsiveIntroduceImageContainer";
 import SendIcon from '@mui/icons-material/Send';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LeftImageIntroduceCard from "../../components/LeftImageIntroduceCard";
 import RightImageIntroduceCard from "../../components/RightImageIntroduceCard";
 import axios from "axios";
-import { Mutation, useMutation } from "react-query";
+import { useMutation } from "react-query";
 
 export interface LearnMeProps {
 }
@@ -15,12 +15,29 @@ export interface LearnMeProps {
 
 export default function LearnMeIntroduce({}:LearnMeProps){
 
-    const mutation = useMutation(() => axios.post("/api/twitter/service/learn_me"))
+    const mutation = useMutation(() => axios.post("/api/service/learn_me"))
 
-    const [loading, setLoading] = React.useState(false);
     function handleClick() {
-        setLoading(true);
+        alert("등록되었어요! 학습하는덴 시간이 조금 걸려요. 완료되면 트위터로 알려드릴게요!")
+        mutation.mutate()
+        const cooldown = new Date();
+        cooldown.setDate(cooldown.getDate() + 1);
+        localStorage.setItem("LearnMe-Cooldown",cooldown.getTime().toString());
     }
+
+    const [isCooldown, setIsCooldown] = useState(false);
+
+    useEffect(()=> {
+        const cooldown = Number(localStorage.getItem("LearnMe-Cooldown"));
+        if(cooldown !== null){
+            const current = new Date().getTime();
+
+            // 쿨타임 아직 안 됐음!
+            if(cooldown > current){
+                setIsCooldown(true);
+            }
+        }
+    },[setIsCooldown])
 
     return(
         <Grid sx ={{
@@ -47,9 +64,15 @@ export default function LearnMeIntroduce({}:LearnMeProps){
                         <Grid item>
                             <Divider />
                         </Grid>
+
+                        {isCooldown ?
+                        <Grid container item justifyContent="center">
+                            <Typography variant="h5">이미 최근에 실행했어요! 하루 뒤에 다시 오면 다시 실행 가능해요!</Typography>
+                        </Grid>
+                        :
                         <Grid container item justifyContent="center">
                             <LoadingButton
-                            onClick={()=> mutation.mutate()}
+                            onClick={handleClick}
                             endIcon={<SendIcon />}
                             loading={mutation.isLoading}
                             loadingPosition="end"
@@ -58,6 +81,7 @@ export default function LearnMeIntroduce({}:LearnMeProps){
                                 실행하기!
                             </LoadingButton>
                         </Grid>
+                        }
                         <Grid item>
                             <Divider />
                         </Grid>

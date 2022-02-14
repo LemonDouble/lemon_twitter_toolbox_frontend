@@ -12,7 +12,7 @@ export default function TwitterOAuthHandler(){
     const [searchParams] = useSearchParams();
 
     const {isLoading, error, data }  = useQuery<AccessToken, Error>('accessToken' , async (): Promise<AccessToken> => {
-        return await axios.post("/api/oauth/twitter-login",
+        return await axios.post("/api/oauth/twitter/twitter-login",
         {
                 oauth_token : searchParams.get('oauth_token'),
                 oauth_verifier : searchParams.get('oauth_verifier'),

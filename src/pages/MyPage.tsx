@@ -6,22 +6,29 @@ import RecommendServiceNoticeBoard from "../components/RecommendServiceNoticeBoa
 import UserShowCard from "../components/UserShowCard";
 import UsingServiceNoticeBoard from "../components/UsingServiceNoticeBoard";
 import useServerProfile from "../hooks/useServerProfile";
+import useServerRegisteredService from "../hooks/useServerRegisteredService";
 import { AllServiceList } from "../recoil/ServiceList";
 
 
 export default function MyPage(){
 
-    const { isLoading, error, data } = useServerProfile();
+
+    const profileQuery = useServerProfile();
+    const RegisteredServiceQuery = useServerRegisteredService();
     
     const allService = useRecoilValue(AllServiceList);
 
-    if(isLoading) return <>Loading..</>
+    if(profileQuery.isLoading || RegisteredServiceQuery.isLoading ) return <>Loading..</>
     
-    if(error){
+    if(profileQuery.error || RegisteredServiceQuery.isError){
         return <ErrorNoticeCard />
     }
 
-    if(data){
+    if(profileQuery.data && RegisteredServiceQuery.data ){
+        const registeredServiceArray = RegisteredServiceQuery.data.map(
+            item => allService.filter(serviceItem => serviceItem.serviceName === item.service_type)
+        ).reduce((prev,next) => prev.concat(next),[])
+
         return (
             <Grid sx ={{
                 width: "100vw",
@@ -45,9 +52,9 @@ export default function MyPage(){
                             </Grid>
                             <Grid container item flex={1}>
                                 <UserShowCard 
-                                profileImageUrlPath={data.profile_image_url}
-                                UserName={data?.screen_name}
-                                UserBio={data?.user_bio}
+                                profileImageUrlPath={profileQuery.data.profile_image_url}
+                                UserName={profileQuery.data?.screen_name}
+                                UserBio={profileQuery.data?.user_bio}
                                 FollowingCount={10}
                                 FollowerCount={100} />
                             </Grid>
@@ -62,7 +69,7 @@ export default function MyPage(){
                             </Grid>
                             <Grid container item flex={1}>
                                 <UsingServiceNoticeBoard
-                                UsingServiceArray = {allService}/>
+                                UsingServiceArray = {registeredServiceArray}/>
                             </Grid>
                         </Grid>
                     </Grid>

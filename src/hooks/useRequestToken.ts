@@ -12,6 +12,6 @@ export type RequestToken = {
 export default function useRequestToken(){
 
     return useQuery<RequestToken, Error>('responseToken', async ():Promise<RequestToken> =>{
-        return (await axios.get("/api/oauth/request-token")).data
+        return (await axios.get("/api/oauth/twitter/request-token")).data
     })
 }
