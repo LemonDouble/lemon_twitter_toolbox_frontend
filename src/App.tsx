@@ -16,6 +16,7 @@ import MyPage from "./pages/MyPage";
 import { Box, useMediaQuery } from "@mui/material";
 import LogoutHander from "./pages/LogoutHandler";
 import LearnMeIntroduce from "./pages/servicesPage/LearnMeIntroduce";
+import IntroducePage from "./pages/IntroducePage";
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ function App() {
               <BrowserRouter>
                 <Routes>
                   <Route path="/" element={<Main />} />
+                  <Route path="/introduce" element={<IntroducePage />} />
                   <Route path="/mypage" element={<MyPage />} />
                   <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />} />
                   <Route path="/logout" element={<LogoutHander />} />

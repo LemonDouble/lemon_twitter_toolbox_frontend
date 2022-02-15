@@ -6,6 +6,8 @@ import DarkModeIcon from '@mui/icons-material/DarkMode';
 import React from "react";
 import { ColorModeContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { isLoginState } from "../recoil/isLogin";
 
 export interface MenuBarWithoutNotificationProps {
 }
@@ -14,6 +16,8 @@ export interface MenuBarWithoutNotificationProps {
 export default function MenuBarWithoutNotification({}:MenuBarWithoutNotificationProps){
 
     const navigate = useNavigate();
+    const isLogin = useRecoilValue(isLoginState);
+
 
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const UserMenu = [{name : 'My Page', url : '/mypage'}, {name : 'Logout', url : '/logout'}];
@@ -38,7 +42,7 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                         color="inherit"
                         aria-label="page logo"
                         sx={{ mr: 2 }}
-                        onClick={() => navigate("/mypage")}
+                        onClick={() => isLogin ? navigate("/mypage") : navigate("/")}
                     >
                         <HomeRepairServiceIcon />
                     </IconButton>
@@ -63,8 +67,9 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                                 <DarkModeIcon />
                             </IconButton>
                         </Tooltip>
-                        
-                        <Tooltip title="Open User Menu">
+                
+
+                        {isLogin && <><Tooltip title="Open User Menu">
                             <IconButton
                             size="large"
                             edge="end"
@@ -99,6 +104,8 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                                 </MenuItem>
                             ))}
                         </Menu>
+                        </>
+                        }
                     </Box>
                 </Toolbar>
             </AppBar>

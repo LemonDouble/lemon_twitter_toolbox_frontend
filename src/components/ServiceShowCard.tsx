@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import SvgIcon from '@mui/icons-material/DoubleArrow';
+import { useNavigate } from 'react-router-dom';
 export interface ServiceShowCardProps {
     serviceName : string;
     Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement> & {title?: string | undefined;}>
@@ -23,6 +24,8 @@ export default function ServiceShowCard({
     cardContent,
     cardURL,
 }: ServiceShowCardProps) {
+
+  const navigate = useNavigate();
 
   return (
     <Card elevation={3} sx={{ height:"100%", display:"flex", flexDirection:"column", justifyContent:"space-between",}}>
@@ -41,7 +44,7 @@ export default function ServiceShowCard({
         </Typography>
       </CardContent>
       <CardActions sx={{display:"flex", justifyContent:"flex-end"}}>
-        <IconButton aria-label="move" size="small" href={cardURL}>
+        <IconButton aria-label="move" size="small" onClick={()=> navigate(cardURL)}>
             바로 사용해보기!
             <DoubleArrowIcon />
         </IconButton>

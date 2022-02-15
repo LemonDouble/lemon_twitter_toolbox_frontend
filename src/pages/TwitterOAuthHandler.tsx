@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Navigate, useSearchParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
+import { isLoginState } from "../recoil/isLogin";
 
 export type AccessToken = {
     access_token:string;
@@ -10,6 +12,7 @@ export type AccessToken = {
 export default function TwitterOAuthHandler(){
     
     const [searchParams] = useSearchParams();
+    const [isLogin, setIsLogin] = useRecoilState(isLoginState);
 
     const {isLoading, error, data }  = useQuery<AccessToken, Error>('accessToken' , async (): Promise<AccessToken> => {
         return await axios.post("/api/oauth/twitter/twitter-login",
@@ -35,6 +38,7 @@ export default function TwitterOAuthHandler(){
     if(data){
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`;
         localStorage.setItem("token", data.access_token);
+        setIsLogin(true);
         return <Navigate replace to="/mypage" />
     }
 

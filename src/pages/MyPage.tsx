@@ -7,8 +7,9 @@ import UserShowCard from "../components/UserShowCard";
 import UsingServiceNoticeBoard from "../components/UsingServiceNoticeBoard";
 import useServerProfile from "../hooks/useServerProfile";
 import useServerRegisteredService from "../hooks/useServerRegisteredService";
+import { isLoginState } from "../recoil/isLogin";
 import { AllServiceList } from "../recoil/ServiceList";
-
+import { Navigate } from "react-router-dom";
 
 export default function MyPage(){
 
@@ -16,7 +17,12 @@ export default function MyPage(){
     const profileQuery = useServerProfile();
     const RegisteredServiceQuery = useServerRegisteredService();
     
+    const isLogin = useRecoilValue(isLoginState);
     const allService = useRecoilValue(AllServiceList);
+
+    if(!isLogin){
+        return <Navigate replace to="/introduce" />
+    }
 
     if(profileQuery.isLoading || RegisteredServiceQuery.isLoading ) return <>Loading..</>
     

@@ -3,13 +3,13 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import './Main.css';
 import useRequestToken from "../hooks/useRequestToken";
 import React from "react";
-import { ColorModeContext } from "../App";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Main(){
 
-    const colorMode = React.useContext(ColorModeContext);
+    const navigate = useNavigate();
 
     const {isLoading, error, data } = useRequestToken();
 
@@ -41,7 +41,7 @@ export default function Main(){
                     </Grid>
                     <Grid container direction="row" justifyContent="flex-end" alignItems="flex-end" columnSpacing="20px">
                         <Grid item>
-                        <Button variant="outlined" size="large" onClick={colorMode.toggleColorMode}> 살펴보기 </Button>
+                        <Button variant="outlined" size="large" onClick={() => navigate("/introduce")}> 살펴보기 </Button>
                         </Grid>
                         <Grid item>
                         <Button variant="contained"

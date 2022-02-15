@@ -8,6 +8,8 @@ import LeftImageIntroduceCard from "../../components/LeftImageIntroduceCard";
 import RightImageIntroduceCard from "../../components/RightImageIntroduceCard";
 import axios from "axios";
 import { useMutation } from "react-query";
+import { useRecoilValue } from "recoil";
+import { isLoginState } from "../../recoil/isLogin";
 
 export interface LearnMeProps {
 }
@@ -16,6 +18,8 @@ export interface LearnMeProps {
 export default function LearnMeIntroduce({}:LearnMeProps){
 
     const mutation = useMutation(() => axios.post("/api/service/learn_me"))
+
+    const isLogin = useRecoilValue(isLoginState);
 
     function handleClick() {
         alert("등록되었어요! 학습하는덴 시간이 조금 걸려요. 완료되면 트위터로 알려드릴게요!")
