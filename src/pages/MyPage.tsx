@@ -13,12 +13,11 @@ import { Navigate } from "react-router-dom";
 
 export default function MyPage(){
 
-
-    const profileQuery = useServerProfile();
-    const RegisteredServiceQuery = useServerRegisteredService();
-    
     const isLogin = useRecoilValue(isLoginState);
     const allService = useRecoilValue(AllServiceList);
+
+    const profileQuery = useServerProfile(isLogin);
+    const RegisteredServiceQuery = useServerRegisteredService(isLogin);
 
     if(!isLogin){
         return <Navigate replace to="/introduce" />

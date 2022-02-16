@@ -4,6 +4,7 @@ import CardHeader from '@mui/material/CardHeader';
 import IconButton from '@mui/material/IconButton';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import SvgIcon from '@mui/icons-material/DoubleArrow';
+import { useNavigate } from 'react-router-dom';
 
 export interface CompactServiceShowCardProps {
     serviceName : string;
@@ -19,6 +20,7 @@ export default function CompactServiceShowCard({
     cardURL,
 }: CompactServiceShowCardProps) {
 
+  const navigate = useNavigate();
 
   return (
     <Card elevation={3} sx={{verticalAlign: 'center'}}>
@@ -31,7 +33,7 @@ export default function CompactServiceShowCard({
           variant:"body1"
         }}
         action={
-          <IconButton aria-label="settings" href={cardURL}>
+          <IconButton aria-label="settings" onClick={()=>navigate(cardURL)}>
             <DoubleArrowIcon />
           </IconButton>
           }

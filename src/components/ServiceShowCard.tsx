@@ -45,7 +45,7 @@ export default function ServiceShowCard({
       </CardContent>
       <CardActions sx={{display:"flex", justifyContent:"flex-end"}}>
         <IconButton aria-label="move" size="small" onClick={()=> navigate(cardURL)}>
-            바로 사용해보기!
+            자세히 보기
             <DoubleArrowIcon />
         </IconButton>
       </CardActions>

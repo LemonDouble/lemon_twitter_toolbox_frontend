@@ -9,8 +9,8 @@ export type UserProfile = {
     user_bio: string;
 }
 
-export default function useServerProfile(){
+export default function useServerProfile(isLogin : boolean){
     return useQuery<UserProfile, Error>('profileURL', async ():Promise<UserProfile> =>
-     (await axios.get('/api/twitter/user-profile')).data
+     (await axios.get('/api/twitter/user-profile')).data, {enabled: isLogin}
    )
 }

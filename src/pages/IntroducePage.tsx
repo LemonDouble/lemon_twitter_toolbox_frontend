@@ -1,16 +1,18 @@
-import { Box, Divider, Grid, Typography } from "@mui/material";
-import { Navigate } from "react-router-dom";
+import { Box, Button, Divider, Grid, Typography } from "@mui/material";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import MenuBarWithoutNotification from "../components/MenuBarWithoutNotification";
 import RecommendServiceNoticeBoard from "../components/RecommendServiceNoticeBoard";
 import { isLoginState } from "../recoil/isLogin";
 import { AllServiceList } from "../recoil/ServiceList";
-
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 
 export default function IntroducePage(){
 
     const allService = useRecoilValue(AllServiceList);
     const isLogin = useRecoilValue(isLoginState);
+
+    const navigate = useNavigate();
 
     if(isLogin){
         return <Navigate replace to="/mypage" />
@@ -43,6 +45,18 @@ export default function IntroducePage(){
                         </Grid>
                     </Grid>
                 </Grid>
+
+                <Grid item lg ={10} md ={10} sm ={10} xs ={10}>
+                    <Grid container direction="column" justifyContent="space-between" sx={{height:"100%",display:"flex"}}>
+                        <Grid container direction="column" item sx={{height:"40px"}}>
+                            <Button variant="outlined" startIcon={<KeyboardReturnIcon />}
+                            onClick={()=> navigate("/")}>
+                                홈으로 돌아가기
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Grid>
+
 
 
                 {/* 서비스에 아직 Footer 없는데, 마지막 컴포넌트가 바닥에 딱 붙으면 보기 좀 그러니까 추가해줌*/}

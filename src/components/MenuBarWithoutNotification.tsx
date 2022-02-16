@@ -1,22 +1,23 @@
-import { AppBar, Box, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useState } from "react";
-import { AccountCircle } from "@mui/icons-material";
-import HomeRepairServiceIcon from '@mui/icons-material/HomeRepairService';
+import Home from '@mui/icons-material/Home';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import React from "react";
 import { ColorModeContext } from "../App";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { isLoginState } from "../recoil/isLogin";
+import useServerProfile from "../hooks/useServerProfile";
 
 export interface MenuBarWithoutNotificationProps {
 }
 
 
-export default function MenuBarWithoutNotification({}:MenuBarWithoutNotificationProps){
+export default function MenuBarWithoutNotification(){
 
     const navigate = useNavigate();
     const isLogin = useRecoilValue(isLoginState);
+    const profileQuery = useServerProfile(isLogin); 
 
 
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -44,7 +45,7 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                         sx={{ mr: 2 }}
                         onClick={() => isLogin ? navigate("/mypage") : navigate("/")}
                     >
-                        <HomeRepairServiceIcon />
+                        <Home />
                     </IconButton>
 
                     <Typography
@@ -79,7 +80,7 @@ export default function MenuBarWithoutNotification({}:MenuBarWithoutNotification
                             onClick={handleOpenUserMenu}
                             color="inherit"
                             >
-                                <AccountCircle />
+                                <Avatar alt="Remy Sharp" src={profileQuery.data?.profile_image_url} />
                             </IconButton>
                         </Tooltip>
                         <Menu

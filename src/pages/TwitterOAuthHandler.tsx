@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useQuery } from "react-query";
 import { Navigate, useSearchParams } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
 import { isLoginState } from "../recoil/isLogin";
 
@@ -12,7 +12,7 @@ export type AccessToken = {
 export default function TwitterOAuthHandler(){
     
     const [searchParams] = useSearchParams();
-    const [isLogin, setIsLogin] = useRecoilState(isLoginState);
+    const setIsLogin = useSetRecoilState(isLoginState);
 
     const {isLoading, error, data }  = useQuery<AccessToken, Error>('accessToken' , async (): Promise<AccessToken> => {
         return await axios.post("/api/oauth/twitter/twitter-login",
