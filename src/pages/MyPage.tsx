@@ -13,6 +13,7 @@ import { Navigate } from "react-router-dom";
 
 export default function MyPage(){
 
+
     const isLogin = useRecoilValue(isLoginState);
     const allService = useRecoilValue(AllServiceList);
 
@@ -60,8 +61,8 @@ export default function MyPage(){
                                 profileImageUrlPath={profileQuery.data.profile_image_url}
                                 UserName={profileQuery.data?.screen_name}
                                 UserBio={profileQuery.data?.user_bio}
-                                FollowingCount={10}
-                                FollowerCount={100} />
+                                FollowingCount={profileQuery.data?.following_count}
+                                FollowerCount={profileQuery.data?.follower_count} />
                             </Grid>
                         </Grid>
                     </Grid>

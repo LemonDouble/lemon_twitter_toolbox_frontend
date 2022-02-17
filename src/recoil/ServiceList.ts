@@ -19,13 +19,13 @@ export const AllServiceList = atom<ServiceShowCardProps[]>({
         serviceName : "AUTOTWEETDELETER",
         Icon : EraserIcon,
         cardTitle : "자동 트윗 지우개",
-        cardContent : "매일 자동으로 트윗을 지워줘요! 혹시 실언을 했더라도 이제 걱정 끝!",
+        cardContent : "매일 자동으로 트윗을 지워줘요!",
         cardURL : "/auto-delete-tweet"
     }, {
         serviceName : "FOLLOWERTRACKER",
         Icon : MagnifyingGlass,
         cardTitle : "팔로워 추적기",
-        cardContent : "주기적으로 누가 팔로우했는지, 누가 언팔로우했는지 알려줘요! 계폭한 사람이 누군지 이제 고민할 필요 없어요!",
+        cardContent : "주기적으로 누가 팔로우했는지, 누가 언팔로우했는지 알려줘요! 이제 누가 사라졌는지 기억을 더듬을 필요가 없어요!",
         cardURL : "/follower-tracker"
     },]
 })

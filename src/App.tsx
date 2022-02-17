@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import TwitterOAuthHandler from "./pages/TwitterOAuthHandler";
 
 import {
-  RecoilRoot,
+  useSetRecoilState,
 } from 'recoil';
 import axios from "axios";
 import { requestURI } from "./hooks/serverData";
@@ -17,6 +17,8 @@ import { Box, useMediaQuery } from "@mui/material";
 import LogoutHander from "./pages/LogoutHandler";
 import LearnMeIntroduce from "./pages/servicesPage/LearnMeIntroduce";
 import IntroducePage from "./pages/IntroducePage";
+import LearnMeChatPage from "./pages/servicesPage/LearnMeChatPage";
+import { isLoginState } from "./recoil/isLogin";
 
 const queryClient = new QueryClient();
 
@@ -39,10 +41,14 @@ export function useWidth() {
 }
 
 function App() {
+  const setIsLogin = useSetRecoilState(isLoginState)
 
   useEffect(()=> {
     const acces_token = localStorage.getItem("token");
-    axios.defaults.headers.common['Authorization'] = `Bearer ${acces_token}`;
+    if(acces_token !== null){
+       axios.defaults.headers.common['Authorization'] = `Bearer ${acces_token}`;
+       setIsLogin(true);
+    }
   })
 
   return (
@@ -57,20 +63,19 @@ function App() {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-          <RecoilRoot>
-            <QueryClientProvider client = {queryClient}>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Main />} />
-                  <Route path="/introduce" element={<IntroducePage />} />
-                  <Route path="/mypage" element={<MyPage />} />
-                  <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />} />
-                  <Route path="/logout" element={<LogoutHander />} />
-                  <Route path="learn-me" element={<LearnMeIntroduce />} />
-                </Routes>
-              </BrowserRouter>
-            </QueryClientProvider>
-          </RecoilRoot>
+          <QueryClientProvider client = {queryClient}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Main />} />
+                <Route path="/introduce" element={<IntroducePage />} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />} />
+                <Route path="/logout" element={<LogoutHander />} />
+                <Route path="/learn-me" element={<LearnMeIntroduce />} />
+                <Route path="/test" element={<LearnMeChatPage />} />
+              </Routes>
+            </BrowserRouter>
+          </QueryClientProvider>
         </Box>
     </>
   );

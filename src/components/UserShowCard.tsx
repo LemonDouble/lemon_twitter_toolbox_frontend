@@ -37,7 +37,7 @@ export default function UserShowCard({
 
     
     return(
-        <Card sx = {{height:"100%", display:'flex', justifyContent:"center", alignItems:"center",}}>
+        <Card sx = {{width:"100%" ,height:"100%", display:'flex', justifyContent:"center", alignItems:"center",}}>
             <CardContent sx ={{width:"0%"}} />
             <CardMedia
             component="img"

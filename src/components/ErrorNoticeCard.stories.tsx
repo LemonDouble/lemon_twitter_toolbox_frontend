@@ -1,6 +1,5 @@
 import React from "react";
 import { Meta, Story } from "@storybook/react";
-import SimpleButton, { SimpleButtonProps } from "./SimpleButton";
 import ErrorNoticeCard, { ErrorNoticeCardProps } from "./ErrorNoticeCard";
 
 export default {

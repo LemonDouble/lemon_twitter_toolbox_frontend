@@ -7,6 +7,8 @@ export type UserProfile = {
     screen_name : string;
     screen_nickname : string;
     user_bio: string;
+    follower_count : number;
+    following_count : number;
 }
 
 export default function useServerProfile(isLogin : boolean){

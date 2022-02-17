@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import {ToggleColorModeApp} from "./App";
 import reportWebVitals from "./reportWebVitals";
 import './index.css';
+import { RecoilRoot } from "recoil";
 
 ReactDOM.render(
   <React.StrictMode>
+    <RecoilRoot>
     <ToggleColorModeApp />
+    </RecoilRoot>
   </React.StrictMode>,
   document.getElementById("root")
 );
