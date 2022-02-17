@@ -31,8 +31,13 @@ export default function Chatbot({userData}:ChatbotProps){
         isMyChat : false,
         isImage : false,
         Message : "그러면, 아래 채팅창에 아무 질문이나 적어 주세요!"
-    },
-])
+    },])
+
+    const appendChatData = (appendData :ChatData[]) =>{
+        setChatData([...chatData, ...appendData])
+    }
+
+
     
     return (
         <Paper component={Grid} item container lg ={6} md ={6} sm ={10} xs ={10} 
@@ -47,7 +52,9 @@ export default function Chatbot({userData}:ChatbotProps){
                 chatData={chatData}
                 avatarImageURL={userData.profile_image_url}
                 />
-                <ChatbotInputSpace></ChatbotInputSpace>
+                <ChatbotInputSpace
+                appendChatData={appendChatData}
+                ></ChatbotInputSpace>
             </Stack>
         </Paper>
     )
