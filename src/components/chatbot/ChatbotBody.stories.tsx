@@ -25,5 +25,5 @@ Basic.args = {
         isImage : false,
         Message : "그러면, 아래 채팅창에 아무 질문이나 적어 주세요!"
     },],
-    avatarImageURL : "https://placeimg.com/400/400/animals"
+    avatarImageURL : "https://via.placeholder.com/400"
 };

@@ -11,6 +11,6 @@ const Template: Story<ChatYourMessageProps> = (args) => <ChatYourMessage {...arg
 
 export const Basic = Template.bind({});
 Basic.args = {
-  avatarImageURL: "https://placeimg.com/400/400/animals",
+  avatarImageURL: "https://via.placeholder.com/400",
   Message: "매우 감동적인 메세지"
 };

@@ -11,6 +11,6 @@ const Template: Story<ChatbotHeaderProps> = (args) => <ChatbotHeader {...args} /
 
 export const Basic = Template.bind({});
 Basic.args = {
-  avatarImageURL: "https://placeimg.com/400/400/animals",
+  avatarImageURL: "https://via.placeholder.com/400",
   userName: "레몬즙"
 };
