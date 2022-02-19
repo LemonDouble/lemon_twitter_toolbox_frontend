@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorNoticeCard from "../../components/ErrorNoticeCard";
 import moment from "moment";
 import useServerRegisteredService from "../../hooks/useServerRegisteredService";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export interface LearnMeProps {
 }
@@ -33,13 +34,16 @@ export default function LearnMeIntroduce(){
         }
     }
 
-    function handleLoginServiceClick() {
+    async function handleLoginServiceClick() {
+        await registerMutation.mutate();
+        await RegisteredServiceQuery.refetch();
         alert("등록되었어요! 학습하는덴 시간이 조금 걸리는데, 보통 10분 정도 안에 끝나요. 완료되면 트위터로 알려 드릴게요!");
-        registerMutation.mutate()
-        
+        console.log(RegisteredServiceQuery)
     }
 
-    if(isLogin && RegisteredServiceQuery.isLoading) return <>Loading..</>
+    if(isLogin && RegisteredServiceQuery.isLoading){
+        return <LoadingComponent loadingMessage="Loading.." />
+    }
     
     if(isLogin && RegisteredServiceQuery.error){
         alert("오류가 발생했습니다 : " + RegisteredServiceQuery.error.message);

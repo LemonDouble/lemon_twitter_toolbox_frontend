@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import { Navigate, useSearchParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
+import LoadingComponent from "../components/LoadingComponent";
 import { isLoginState } from "../recoil/isLogin";
 
 export type AccessToken = {
@@ -25,7 +26,7 @@ export default function TwitterOAuthHandler(){
     });
 
     if(isLoading){
-        return <>처리 중 . . . </>
+        return <LoadingComponent loadingMessage="Processing Login.." />
     }
 
     if(error){

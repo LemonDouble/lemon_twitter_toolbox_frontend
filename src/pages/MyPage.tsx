@@ -10,6 +10,7 @@ import useServerRegisteredService from "../hooks/useServerRegisteredService";
 import { isLoginState } from "../recoil/isLogin";
 import { AllServiceList } from "../recoil/ServiceList";
 import { Navigate } from "react-router-dom";
+import LoadingComponent from "../components/LoadingComponent";
 
 export default function MyPage(){
 
@@ -24,7 +25,9 @@ export default function MyPage(){
         return <Navigate replace to="/introduce" />
     }
 
-    if(profileQuery.isLoading || RegisteredServiceQuery.isLoading ) return <>Loading..</>
+    if(profileQuery.isLoading || RegisteredServiceQuery.isLoading ) {
+        return <LoadingComponent loadingMessage="Loading.." />
+    }
     
     if(profileQuery.error || RegisteredServiceQuery.isError){
         return <ErrorNoticeCard />

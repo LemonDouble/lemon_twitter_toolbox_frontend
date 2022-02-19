@@ -1,10 +1,11 @@
-import { Grid } from "@mui/material";
+import {  Grid } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import MenuBarWithoutNotification from "../../components/MenuBarWithoutNotification";
 import { isLoginState } from "../../recoil/isLogin";
 import useServerProfile from "../../hooks/useServerProfile";
 import ErrorNoticeCard from "../../components/ErrorNoticeCard";
 import Chatbot from "../../components/chatbot/Chatbot";
+import LoadingComponent from "../../components/LoadingComponent";
 
 
 export default function LearnMeChatPage(){
@@ -13,7 +14,9 @@ export default function LearnMeChatPage(){
   const profileQuery = useServerProfile(isLogin);
 
 
-  if(profileQuery.isLoading) return <>Loading..</>
+  if(profileQuery.isLoading){
+      return <LoadingComponent loadingMessage="Loading.." />
+  }
 
   if(profileQuery.error){
         alert("오류가 발생했습니다 : " + profileQuery.error.message);

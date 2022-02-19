@@ -5,6 +5,7 @@ import useRequestToken from "../hooks/useRequestToken";
 import React from "react";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
 import { useNavigate } from "react-router-dom";
+import LoadingComponent from "../components/LoadingComponent";
 
 
 export default function Main(){
@@ -13,7 +14,11 @@ export default function Main(){
 
     const {isLoading, error, data } = useRequestToken();
 
-    if(isLoading) return <>Loading..</>
+    if(isLoading){
+        return (
+            <LoadingComponent loadingMessage="Loading.." />
+        )
+    }
     
     if(error){
         alert("오류가 발생했습니다 : " + error.message);

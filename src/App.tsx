@@ -72,7 +72,7 @@ function App() {
                 <Route path="/api/oauth/twitter" element={<TwitterOAuthHandler />} />
                 <Route path="/logout" element={<LogoutHander />} />
                 <Route path="/learn-me" element={<LearnMeIntroduce />} />
-                <Route path="/test" element={<LearnMeChatPage />} />
+                <Route path="/learn-me/chatbot" element={<LearnMeChatPage />} />
               </Routes>
             </BrowserRouter>
           </QueryClientProvider>
