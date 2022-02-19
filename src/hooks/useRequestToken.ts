@@ -9,9 +9,8 @@ export type RequestToken = {
 }
 
 
-export default function useRequestToken(){
+export default function useRequestToken(enabled:boolean){
 
     return useQuery<RequestToken, Error>('responseToken', async ():Promise<RequestToken> =>{
-        return (await axios.get("/api/oauth/twitter/request-token")).data
-    })
+        return (await axios.get("/api/oauth/twitter/request-token")).data}, {enabled: enabled})
 }
