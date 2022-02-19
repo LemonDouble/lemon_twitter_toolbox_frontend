@@ -17,6 +17,7 @@ import LoadingComponent from "../../components/LoadingComponent";
 import { useEffect, useState } from "react";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import useRequestToken from "../../hooks/useRequestToken";
+import BasicBreadcrumbs from "../../components/BasicBreadcrumbs";
 
 export interface LearnMeProps {
 }
@@ -37,6 +38,8 @@ export default function LearnMeIntroduce(){
         cooldownInHours : 0,
         cooldownInMinutes : 0,
     });
+
+    const pathData = [{title:"Home", href:"/mypage", isLink:true},{title:"Learn-me", href:"/learn-me", isLink:false}]
 
     useEffect(()=> {
         if(isLogin && RegisteredServiceQuery.data){
@@ -89,7 +92,7 @@ export default function LearnMeIntroduce(){
             <Box sx = {{height:"50px"}}></Box>
             <Grid container justifyContent="center" sx={{width:"100%", height:"100%"}}>
                 <Stack spacing={3} alignItems="center" sx={{width:"80%"}}>
-
+                    <BasicBreadcrumbs pathData={pathData} />
                     <Paper component={Grid} container item alignItems="center" direction="column" p="10px" sx={{width:"100%"}}>
 
                         <Typography variant="h3"> Learn Me! </Typography>

@@ -11,8 +11,8 @@ export default function LogoutHander(){
     useEffect(()=> {
        delete axios.defaults.headers.common['Authorization'];
        localStorage.removeItem("token");
+       window.location.href = "/"
     }, [])
 
-    return <Navigate replace to="/" />
-    
+    return <></>
 }

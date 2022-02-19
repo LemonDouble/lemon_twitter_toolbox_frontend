@@ -52,7 +52,6 @@ export default function MyPage(){
                     justifyContent : "center",
                     display:"flex"
                 }}>
-
                     <Grid item lg ={4} md ={4} sm ={10} xs ={10} sx={{height:"100%"}}>
                         <Grid container direction="column" justifyContent="space-between" sx={{height:"100%"}}>
                             <Grid container direction="column" item sx={{height:"40px"}}>
