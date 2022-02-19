@@ -10,7 +10,9 @@ export interface ChatbotInputSpaceProps {
 
 export default function ChatbotInputSpace({appendChatData}:ChatbotInputSpaceProps){
 
+    // 입력 TextField의 값 state
     const [textFieldValue, setTextFieldValue] = useState('');
+    // 입력 TextField의 Error와 도움 text State
     const [textFieldError, setTextFieldError] = useState({
         isError: false,
         helperText: ""

@@ -1,5 +1,5 @@
 import { Stack} from "@mui/material";
-import { useEffect, useRef } from "react";
+import React ,{ useEffect, useRef } from "react";
 import { ChatData } from "./Chatbot";
 import ChatMyMessage from "./ChatMyMessage";
 import ChatYourImage from "./ChatYourImage";
@@ -13,11 +13,12 @@ export interface ChatbotBodyProps {
 
 export default function ChatbotBody({chatData, avatarImageURL}:ChatbotBodyProps){
 
-    const scrollDownRef = useRef<HTMLUListElement>();
+    const scrollDownRef = useRef<HTMLDivElement>(null);
 
-    useEffect(()=>{
+    useEffect(
+        ()=>{
         if(scrollDownRef.current){
-            scrollDownRef.current.scrollTop = scrollDownRef.current.scrollHeight;
+            return scrollDownRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     },[chatData])
 
@@ -26,7 +27,6 @@ export default function ChatbotBody({chatData, avatarImageURL}:ChatbotBodyProps)
         <Stack spacing={1.5} 
         sx={{width:"100%", height:"500px", paddingLeft:"10px",
          paddingRight:"10px", boxSizing:"border-box", overflowY:"scroll"}}
-         ref={scrollDownRef}
          >
             {
                 chatData.map((item, index) => {
@@ -40,9 +40,11 @@ export default function ChatbotBody({chatData, avatarImageURL}:ChatbotBodyProps)
                     if(!item.isMyChat && item.isImage){
                         return <ChatYourImage key={index} avatarImageURL={avatarImageURL} imageURL={item.Message}/>
                     }
-
+                    
+                    return <></>
                 })
             }
+            <div ref={scrollDownRef} />
         </Stack>
         )
 }
