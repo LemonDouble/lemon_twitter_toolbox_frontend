@@ -1,4 +1,4 @@
-import { Alert, AlertColor, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuBarWithoutNotification from "../../components/MenuBarWithoutNotification";
 import ResponsiveIntroduceImageContainer from "../../components/ResponsiveIntroduceImageContainer";
@@ -18,7 +18,7 @@ import { useEffect, useState } from "react";
 import TwitterIcon from '@mui/icons-material/Twitter';
 import useRequestToken from "../../hooks/useRequestToken";
 import BasicBreadcrumbs from "../../components/BasicBreadcrumbs";
-
+import { snackbarState } from "../../App";
 export interface LearnMeProps {
 }
 
@@ -54,12 +54,7 @@ export default function LearnMeIntroduce(){
         openSuccessSnackbar("정상적으로 등록되었어요!\n 완료되는 대로 알려드릴게요!");
     }
 
-    interface snackState{
-        open: boolean,
-        severity: AlertColor,
-        message: string
-    }
-    const [ snackbarState, handleSnackbarState] = useState<snackState>({
+    const [ snackbarState, handleSnackbarState] = useState<snackbarState>({
         open: false,
         severity: "info",
         message: "",

@@ -13,7 +13,7 @@ import {
 import axios from "axios";
 import { requestURI } from "./hooks/serverData";
 import MyPage from "./pages/MyPage";
-import { Box, useMediaQuery } from "@mui/material";
+import { AlertColor, Box, useMediaQuery } from "@mui/material";
 import LogoutHander from "./pages/LogoutHandler";
 import LearnMeIntroduce from "./pages/servicesPage/LearnMeIntroduce";
 import IntroducePage from "./pages/IntroducePage";
@@ -114,4 +114,10 @@ export function ToggleColorModeApp(){
       </ThemeProvider>
     </ColorModeContext.Provider>
   );
+}
+
+export interface snackbarState{
+        open: boolean,
+        severity: AlertColor,
+        message: string
 }

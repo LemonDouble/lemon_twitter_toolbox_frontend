@@ -53,7 +53,7 @@ export default function MenuBarWithoutNotification(){
                         noWrap
                         component="div"
                     >
-                        Lemon Toolbox
+                        Lemon Toolbox (BETA)
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
 
