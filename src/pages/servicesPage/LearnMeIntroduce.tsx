@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Grid, Paper, Stack, Typography } from "@mui/material";
+import { Alert, AlertColor, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuBarWithoutNotification from "../../components/MenuBarWithoutNotification";
 import ResponsiveIntroduceImageContainer from "../../components/ResponsiveIntroduceImageContainer";
@@ -39,6 +39,50 @@ export default function LearnMeIntroduce(){
         cooldownInMinutes : 0,
     });
 
+    const [ alertOpen, setAlertOpen] = useState(false);
+    const handleClickAlertOpen  = () => {
+        setAlertOpen(true);
+    };
+    const handleAlertClose = () => {
+        setAlertOpen(false);
+    }
+
+    async function handleServiceAgreeClick() {
+        await registerMutation.mutateAsync();
+        await RegisteredServiceQuery.refetch();
+        handleAlertClose();
+        openSuccessSnackbar("정상적으로 등록되었어요!\n 완료되는 대로 알려드릴게요!");
+    }
+
+    interface snackState{
+        open: boolean,
+        severity: AlertColor,
+        message: string
+    }
+    const [ snackbarState, handleSnackbarState] = useState<snackState>({
+        open: false,
+        severity: "info",
+        message: "",
+    })
+
+    const openSuccessSnackbar = (message:string) => {
+        handleSnackbarState({
+            open:true,
+            severity: "success",
+            message:message
+        })
+    }
+
+    const handleSnackbarClose = () => {
+        handleSnackbarState({
+        open: false,
+        severity: "info",
+        message: "",
+    })
+    }
+
+
+
     const pathData = [{title:"Home", href:"/mypage", isLink:true},{title:"Learn-me", href:"/learn-me", isLink:false}]
 
     useEffect(()=> {
@@ -64,12 +108,6 @@ export default function LearnMeIntroduce(){
     }
     }, [RegisteredServiceQuery.data, isLogin])
 
-    async function handleServiceClick() {
-        await registerMutation.mutate();
-        await RegisteredServiceQuery.refetch();
-        alert("등록되었어요! 학습하는덴 시간이 조금 걸리는데, 보통 10분 정도 안에 끝나요. 완료되면 트위터로 알려 드릴게요!");
-    }
-
     if(isLogin && RegisteredServiceQuery.isLoading){
         return <LoadingComponent loadingMessage="Loading.." />
     }
@@ -79,9 +117,8 @@ export default function LearnMeIntroduce(){
         return <ErrorNoticeCard />
     }
 
-
-
     return(
+        <>
         <Grid sx ={{
                 width: "100vw",
                 height: "100vh",
@@ -113,10 +150,11 @@ export default function LearnMeIntroduce(){
                             </Button>
                         </Stack>
                         :
-                        <Stack alignItems="center" spacing={1} sx={{width:"100%"}}>
-                            <Typography variant="body1">컴퓨터가 트윗 데이터를 학습중이에요! 조금만 기다려주세요!</Typography>
-                            <Typography variant="body1">완료시 트위터에서 트윗으로 알려 드려요!</Typography>
-                        </Stack>
+                            isLogin && learnMeStatus?.ready === false &&
+                            <Stack alignItems="center" spacing={1} sx={{width:"100%"}}>
+                                <Typography variant="body1">컴퓨터가 트윗 데이터를 학습중이에요! 조금만 기다려주세요!</Typography>
+                                <Typography variant="body1">완료시 트위터에서 트윗으로 알려 드려요!</Typography>
+                            </Stack>
                         }
                         <Grid item>
                             <Divider />
@@ -135,7 +173,7 @@ export default function LearnMeIntroduce(){
                                 :
                                     <Grid container item justifyContent="center">
                                         <LoadingButton
-                                        onClick={handleServiceClick}
+                                        onClick={handleClickAlertOpen}
                                         endIcon={<SendIcon />}
                                         loading={registerMutation.isLoading}
                                         loadingPosition="end"
@@ -189,5 +227,33 @@ export default function LearnMeIntroduce(){
                 </Stack>
             </Grid>
         </Grid>
+
+        <Dialog
+        open={alertOpen}
+        onClose={handleAlertClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        >
+            <DialogTitle id="alert-dialog-title">{"트윗 알람 전송 알림"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText>
+                    트윗 학습은 시간이 조금 걸려요! <br/>
+                    학습이 완료된 후, 완료 알림을 트윗으로 보내도 괜찮을까요? <br/>
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+                <Button onClick={handleAlertClose}>거부</Button>
+                <Button onClick={handleServiceAgreeClick} autoFocus>동의 </Button>
+            </DialogActions>
+        </Dialog>
+        <Snackbar 
+        open={snackbarState.open}
+        onClose={handleSnackbarClose}
+        autoHideDuration={6000}
+        anchorOrigin={{vertical:"top", horizontal:"center"}}
+        >
+            <Alert severity={snackbarState.severity}>{snackbarState.message}</Alert>
+        </Snackbar>
+        </>
     )
 }
