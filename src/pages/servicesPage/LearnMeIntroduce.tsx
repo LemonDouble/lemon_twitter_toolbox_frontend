@@ -68,7 +68,6 @@ export default function LearnMeIntroduce(){
         await registerMutation.mutate();
         await RegisteredServiceQuery.refetch();
         alert("등록되었어요! 학습하는덴 시간이 조금 걸리는데, 보통 10분 정도 안에 끝나요. 완료되면 트위터로 알려 드릴게요!");
-        console.log(RegisteredServiceQuery)
     }
 
     if(isLogin && RegisteredServiceQuery.isLoading){

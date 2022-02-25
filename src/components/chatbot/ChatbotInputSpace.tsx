@@ -53,12 +53,10 @@ export default function ChatbotInputSpace({appendChatData}:ChatbotInputSpaceProp
         const result = await axios.post("https://aq44ubvx8l.execute-api.ap-northeast-1.amazonaws.com/dev/question",{
             question: question
         })
-        console.log(result.data)
+
         const data = typeof(result.data)==='string' ? JSON.parse(result.data.replace(/\bNaN\b/g, "null")) : result.data;
         // 문자열로 온 true/false를 boolean으로
         data.answer_hasPhoto = data.answer_hasPhoto === "true" ? true : false;
-        
-        console.log(data)
 
         if(data.answer_string !== null){
             newData.push({
