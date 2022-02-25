@@ -15,16 +15,16 @@ export default function BasicBreadcrumbs({pathData}:BasicBreadcrumbsProps){
     return(
         <Breadcrumbs aria-label="breadcrumb">
             {
-                pathData.map((item => {
+                pathData.map(((item,index) => {
                     if(item.isLink){
                         return(
-                            <Link underline="hover" color="inherit" href={item.href}>
+                            <Link underline="hover" color="inherit" href={item.href} key={index}>
                                 {item.title}
                             </Link>
                         )
                     }
 
-                    return <Typography color="text.primary">{item.title}</Typography>
+                    return <Typography color="text.primary" key={index}>{item.title}</Typography>
                 }))
             }
         </Breadcrumbs>
