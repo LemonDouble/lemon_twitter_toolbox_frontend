@@ -48,9 +48,9 @@ export default function LearnMeIntroduce(){
     }
 
     async function handleServiceAgreeClick() {
+        handleAlertClose();
         await registerMutation.mutateAsync();
         await RegisteredServiceQuery.refetch();
-        handleAlertClose();
         openSuccessSnackbar("정상적으로 등록되었어요!\n 완료되는 대로 알려드릴게요!");
     }
 

@@ -1,4 +1,4 @@
-import { Avatar, Paper, Stack, Typography } from "@mui/material";
+import { Avatar, Stack } from "@mui/material";
 
 export interface ChatYourImageProps {
     avatarImageURL : string;
@@ -11,7 +11,7 @@ export default function ChatYourImage({avatarImageURL, imageURL}:ChatYourImagePr
     return(
         <Stack direction="row" spacing={2}>
             <Avatar src={avatarImageURL} />
-            <img src={imageURL} style={{width:"50%"}}/>
+            <img src={imageURL} alt="response image" style={{width:"50%"}}/>
         </Stack>
     )
 }
