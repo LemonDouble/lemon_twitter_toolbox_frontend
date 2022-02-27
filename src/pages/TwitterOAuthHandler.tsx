@@ -40,7 +40,7 @@ export default function TwitterOAuthHandler(){
         axios.defaults.headers.common['Authorization'] = `Bearer ${data.access_token}`;
         localStorage.setItem("token", data.access_token);
         setIsLogin(true);
-        return <Navigate replace to="/mypage" />
+        return <Navigate replace to="/learn-me" />
     }
 
     return <ErrorNoticeCard />

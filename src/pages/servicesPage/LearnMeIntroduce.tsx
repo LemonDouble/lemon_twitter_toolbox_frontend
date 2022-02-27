@@ -128,9 +128,11 @@ export default function LearnMeIntroduce(){
 
                         <Typography variant="h3"> Learn Me! </Typography>
                         <Typography variant="subtitle2"> 내 트윗을 컴퓨터에게 학습시켜 나를 따라하는 도플갱어를 만들어 봐요! </Typography>
-
+                        <Typography variant="subtitle2"> 컴퓨터가 최근 내 트윗 3200개를 읽고 내가 받은 질문과, 내가 한 대답을 학습해요. </Typography>
+                        <Typography variant="subtitle2"> 트위터 API가 최대 3200개의 트윗밖에 제공해 주지 않아, 인공지능이라도 학습에 한계가 있어요.</Typography>
+                        <Typography variant="subtitle2"> 그런 점을 감안하고, 재밌는 가십거리 정도로만 즐겨주셨으면 좋겠어요!</Typography>
                         <Box sx = {{height:"20px"}}></Box>
-
+                        
                         <ResponsiveIntroduceImageContainer imageURL="/img/learn-me.png"/>
                     </Paper>
 
@@ -167,25 +169,14 @@ export default function LearnMeIntroduce(){
                                 </Grid>
                                 :
                                     <Grid container item justifyContent="center">
-                                        <LoadingButton
-                                        onClick={handleClickAlertOpen}
-                                        endIcon={<SendIcon />}
-                                        loading={registerMutation.isLoading}
-                                        loadingPosition="end"
-                                        variant="contained"
-                                        >
-                                            데이터 학습시키기!
-                                        </LoadingButton>
+                                        <Stack spacing={1} alignItems="center">
+                                            <Typography variant="subtitle1"> 베타 버전이라 버그가 있을 수도 있어요. 뭔가 안 되면 @_lemon_berry_ 로 문의주세요!</Typography>
+                                            <Typography variant="subtitle1"> 현재 트위터 API 리밋에 도달해서 처리가 불가능해요 ㅠㅠ</Typography>
+                                        </Stack>
                                     </Grid>
                             :
                                 <Grid container item justifyContent="center">
-                                    <LoadingButton
-                                    variant="contained"
-                                    startIcon ={<TwitterIcon />}
-                                    href={RequestTokenQuery.data?.authentication_url}
-                                    >
-                                        로그인하고 실행하기!
-                                    </LoadingButton>
+                                    <Typography variant="subtitle1"> 현재 트위터 API 리밋에 도달해서 처리가 불가능해요 ㅠㅠ</Typography>
                                 </Grid>
                         }
                         
@@ -209,7 +200,7 @@ export default function LearnMeIntroduce(){
 
                     <LeftImageIntroduceCard 
                     title ="개인 정보 보호"
-                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어서 서버에 저장될 예정이에요. 하지만 언제라도, 만약 내 트윗이 서버에 남아있는게 마음에 들지 않는다면 이 페이지에서 바로 삭제할 수 있어요!"
+                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어서 서버에 저장될 예정이에요. 데이터는 챗봇 제외 아무 곳에도 사용되지 않고, 서비스 종료시 일괄 폐기돼요."
                     imageURL="/img/introduce/secureLogo.png"
                     />
 
