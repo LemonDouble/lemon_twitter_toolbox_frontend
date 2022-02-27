@@ -19,6 +19,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import useRequestToken from "../../hooks/useRequestToken";
 import BasicBreadcrumbs from "../../components/BasicBreadcrumbs";
 import { snackbarState } from "../../App";
+import useLearnMeCanUse from "../../hooks/useLearnmeCanUse";
 export interface LearnMeProps {
 }
 
@@ -30,6 +31,7 @@ export default function LearnMeIntroduce(){
 
     const isLogin = useRecoilValue(isLoginState);
     const RegisteredServiceQuery = useServerRegisteredService(isLogin);
+    const canUseLearnMeQuery = useLearnMeCanUse();
     const RequestTokenQuery = useRequestToken(!isLogin);
 
     const [ learnMeStatus, setLearnMeStatus ] = useState<serverRegisteredService>();
@@ -49,9 +51,16 @@ export default function LearnMeIntroduce(){
 
     async function handleServiceAgreeClick() {
         handleAlertClose();
-        await registerMutation.mutateAsync();
+        const result = await registerMutation.mutateAsync();
+        console.log(result);
         await RegisteredServiceQuery.refetch();
-        openSuccessSnackbar("정상적으로 등록되었어요!\n 완료되는 대로 알려드릴게요!");
+        if(result.status === 201){
+            openSuccessSnackbar(`정상적으로 등록되었어요!
+            완료되는 대로 알려드릴게요!
+            오늘 (${result.data.register_count}/${result.data.register_limit}) 번째 손님이에요!`);
+        }else{
+            openErrorSnackbar(`그 사이에 오늘 사용가능한 사람 수가 다 차버렸어요 ㅠㅠ 정말 죄송하지만 다음에 다시 시도해 주세요.`);
+        }
     }
 
     const [ snackbarState, handleSnackbarState] = useState<snackbarState>({
@@ -64,6 +73,14 @@ export default function LearnMeIntroduce(){
         handleSnackbarState({
             open:true,
             severity: "success",
+            message:message
+        })
+    }
+
+    const openErrorSnackbar = (message:string) => {
+        handleSnackbarState({
+            open:true,
+            severity: "error",
             message:message
         })
     }
@@ -168,16 +185,46 @@ export default function LearnMeIntroduce(){
                                     </Stack>
                                 </Grid>
                                 :
-                                    <Grid container item justifyContent="center">
-                                        <Stack spacing={1} alignItems="center">
-                                            <Typography variant="subtitle1"> 베타 버전이라 버그가 있을 수도 있어요. 뭔가 안 되면 @_lemon_berry_ 로 문의주세요!</Typography>
-                                            <Typography variant="subtitle1"> 현재 트위터 API 리밋에 도달해서 처리가 불가능해요 ㅠㅠ</Typography>
-                                        </Stack>
-                                    </Grid>
+                                    canUseLearnMeQuery.data?.can_use?
+                                        <Grid container item justifyContent="center">
+                                            <Stack spacing={1} alignItems="center">
+                                                <Typography variant="subtitle1"> 베타 버전이라 버그가 있을 수도 있어요. 뭔가 안 되면 @_lemon_berry_ 로 문의주세요!</Typography>
+                                                <LoadingButton
+                                                    onClick={handleClickAlertOpen}
+                                                    endIcon={<SendIcon />}
+                                                    loading={registerMutation.isLoading}
+                                                    loadingPosition="end"
+                                                    variant="contained"
+                                                    >
+                                                        데이터 학습시키기!
+                                                </LoadingButton>
+                                            </Stack>
+                                        </Grid>
+                                    :
+                                        canUseLearnMeQuery.data?.can_use !== undefined &&
+                                        <Grid container item justifyContent="center">
+                                            <Stack spacing={1} alignItems="center">
+                                                <Typography variant="subtitle1"> 오늘 처리 가능한 사람 수를 초과했어요!</Typography>
+                                                <Typography variant="subtitle1"> 아쉽지만, 다음 기회를 노려주세요!! 리밋은 매일 아침 6시에 초기화돼요.</Typography>
+                                            </Stack>
+                                        </Grid>
                             :
-                                <Grid container item justifyContent="center">
-                                    <Typography variant="subtitle1"> 현재 트위터 API 리밋에 도달해서 처리가 불가능해요 ㅠㅠ</Typography>
-                                </Grid>
+                                canUseLearnMeQuery.data?.can_use ?
+                                    <Grid container item justifyContent="center">
+                                        <LoadingButton
+                                        variant="contained"
+                                        startIcon ={<TwitterIcon />}
+                                        href={RequestTokenQuery.data?.authentication_url}
+                                        >
+                                            로그인하고 실행하기!
+                                        </LoadingButton>
+                                    </Grid>
+                                :
+                                    canUseLearnMeQuery.data?.can_use !== undefined &&
+                                        <Grid container item justifyContent="center">
+                                            <Typography variant="subtitle1"> 오늘 처리 가능한 사람 수를 초과했어요!</Typography>
+                                            <Typography variant="subtitle1"> 아쉽지만, 다음 기회를 노려주세요!! 리밋은 매일 아침 6시에 초기화돼요.</Typography>
+                                        </Grid>
                         }
                         
                         <Grid item>
