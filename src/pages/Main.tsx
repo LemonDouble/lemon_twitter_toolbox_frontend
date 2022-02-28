@@ -89,14 +89,11 @@ export default function Main(){
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         >
-            <DialogTitle>{"슬픈 일이에요."}</DialogTitle>
+            <DialogTitle>{"알림"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    현재 트위터 API 리밋으로 일시적으로 추가 등록이 불가능해요. <br/>
+                    트위터 API 정책에 의해, 하루 300명까지 <br/>
                     하지만, 이미 훈련한 데이터가 있는 경우(완료 알람을 받은 경우) 는 정상적으로 사용할 수 있어요. <br/><br/>
-                    훈련 등록은 되었는데 완료 알람이 안 오시는 분들도, API 리밋이 해결되는 대로 완료 알람을 보내드릴게요. <br/><br/>
-                    생각보다 더 많은 관심을 받았는데, 개발팀이 저 혼자라 대응하는데 시간이 좀 걸릴 수도 있어요. 그래도 최대한 빨리 고치도록 노력해 보겠습니다. <br />
-                    관련된 실시간 업데이트는 <a href="https://twitter.com/_lemon_berry_/status/1497439151133986820">여기</a> 서 볼 수 있어요. <br /><br/>
                     취미로 만든 프로젝트에, 많은 관심 주셔서 정말 감사드려요! <br />
                 </DialogContentText>
                 <DialogActions>

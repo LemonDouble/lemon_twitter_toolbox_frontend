@@ -19,6 +19,7 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import useRequestToken from "../../hooks/useRequestToken";
 import BasicBreadcrumbs from "../../components/BasicBreadcrumbs";
 import { snackbarState } from "../../App";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import useLearnMeCanUse from "../../hooks/useLearnmeCanUse";
 export interface LearnMeProps {
 }
@@ -27,6 +28,7 @@ export interface LearnMeProps {
 export default function LearnMeIntroduce(){
 
     const registerMutation = useMutation(() => axios.post("/api/service/learn_me"))
+    const unRegisterMutation = useMutation(() => axios.delete("/api/service/learn_me"))
     const navigate = useNavigate();
 
     const isLogin = useRecoilValue(isLoginState);
@@ -52,7 +54,6 @@ export default function LearnMeIntroduce(){
     async function handleServiceAgreeClick() {
         handleAlertClose();
         const result = await registerMutation.mutateAsync();
-        console.log(result);
         await RegisteredServiceQuery.refetch();
         if(result.status === 201){
             openSuccessSnackbar(`정상적으로 등록되었어요!
@@ -60,6 +61,17 @@ export default function LearnMeIntroduce(){
             오늘 (${result.data.register_count}/${result.data.register_limit}) 번째 손님이에요!`);
         }else{
             openErrorSnackbar(`그 사이에 오늘 사용가능한 사람 수가 다 차버렸어요 ㅠㅠ 정말 죄송하지만 다음에 다시 시도해 주세요.`);
+        }
+    }
+
+    async function handleUnregisterServiceClick(){
+        const result = await unRegisterMutation.mutateAsync();
+        await RegisteredServiceQuery.refetch();
+        setLearnMeStatus(undefined);
+        if(result.status === 200){
+            openSuccessSnackbar(`정상적으로 삭제되었어요! Learn Me 서비스를 이용해 주셔서 감사합니다!`);
+        }else{
+            openErrorSnackbar(`뭔가 오류가 생겼어요. 죄송하지만 다시 한번 시도해주세요.`);
         }
     }
 
@@ -162,6 +174,16 @@ export default function LearnMeIntroduce(){
                             >
                                 챗봇 사용하러 가기
                             </Button>
+                            <LoadingButton
+                            onClick={handleUnregisterServiceClick}
+                            endIcon={<DeleteForeverIcon />}
+                            loading={unRegisterMutation.isLoading}
+                            loadingPosition="end"
+                            variant="contained"
+                            color="error"
+                            >
+                                내 데이터 삭제하기
+                            </LoadingButton>
                         </Stack>
                         :
                             isLogin && learnMeStatus?.ready === false &&
