@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import ErrorNoticeCard from "../components/ErrorNoticeCard";
 import { useNavigate } from "react-router-dom";
 import LoadingComponent from "../components/LoadingComponent";
+import useLearnMeCanUse from "../hooks/useLearnmeCanUse";
 
 
 export default function Main(){
@@ -14,6 +15,7 @@ export default function Main(){
 
     const {isLoading, error, data } = useRequestToken(true);
 
+    const learnMeCanUseQuery = useLearnMeCanUse();
 
     const [openNotification, setOpenNotification] = useState(true);
     
@@ -21,14 +23,19 @@ export default function Main(){
         setOpenNotification(false);
     }
 
-    if(isLoading){
+    if(isLoading || learnMeCanUseQuery.isLoading){
         return (
             <LoadingComponent loadingMessage="Loading.." />
         )
     }
     
-    if(error){
-        alert("오류가 발생했습니다 : " + error.message);
+    if(error || learnMeCanUseQuery.error){
+        if(error){
+            alert("오류가 발생했습니다 : " + error.message);
+        }
+        if(learnMeCanUseQuery.isError){
+            alert("오류가 발생했습니다 : " + learnMeCanUseQuery.error.message);
+        }
         return <ErrorNoticeCard />
     }
 
@@ -92,12 +99,13 @@ export default function Main(){
             <DialogTitle>{"알림"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    트위터 API 정책에 의해, 하루 300명까지 <br/>
-                    하지만, 이미 훈련한 데이터가 있는 경우(완료 알람을 받은 경우) 는 정상적으로 사용할 수 있어요. <br/><br/>
-                    취미로 만든 프로젝트에, 많은 관심 주셔서 정말 감사드려요! <br />
+                    {`트위터 API 정책에 의해, 하루 ${learnMeCanUseQuery.data?.register_limit}명까지 서비스를 이용할 수 있도록 변경했어요.\n`} <br/>
+                    {`더 많은 사람들을 받고 싶지만 이해 부탁드려요 ㅠㅠ`}<br/><br/>
+                    {`현재 이용자 숫자는 ${learnMeCanUseQuery.data?.register_count} / ${learnMeCanUseQuery.data?.register_limit} 명이에요!`}<br/><br/>
+                    {`취미로 만든 프로젝트에, 예상보다 훨씬 많은 관심 주셔서 정말 감사드려요. `}
                 </DialogContentText>
                 <DialogActions>
-                    <Button onClick={handleClose}> 저런! 화이팅 하세요!</Button>
+                    <Button onClick={handleClose}> 확인했어요!</Button>
                 </DialogActions>
             </DialogContent>
         </Dialog>

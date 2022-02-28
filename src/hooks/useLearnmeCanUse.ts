@@ -3,6 +3,8 @@ import { useQuery } from "react-query"
 
 export type LearnMeCanUse = {
     can_use: boolean;
+    register_count: number;
+    register_limit: number;
 }
 
 
