@@ -1,4 +1,4 @@
-import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Paper, Snackbar, Stack, Typography } from "@mui/material";
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider, Grid, Link, Paper, Snackbar, Stack, Typography } from "@mui/material";
 import LoadingButton from '@mui/lab/LoadingButton';
 import MenuBarWithoutNotification from "../../components/MenuBarWithoutNotification";
 import ResponsiveIntroduceImageContainer from "../../components/ResponsiveIntroduceImageContainer";
@@ -248,6 +248,23 @@ export default function LearnMeIntroduce(){
                                             <Typography variant="subtitle1"> 아쉽지만, 다음 기회를 노려주세요!! 리밋은 매일 아침 6시에 초기화돼요.</Typography>
                                         </Grid>
                         }
+                        <Grid item>
+                            <Divider />
+                        </Grid>
+
+                        <Grid item>
+                            <Stack alignItems="center" spacing={1} sx={{width:"100%"}}>
+                                <Typography variant="caption">
+                                    해당 모델은 
+                                    <Link href="https://github.com/jhgan00"target="_blank" rel="noopener"> jhgan00 </Link>
+                                    님의
+                                    <Link href="https://github.com/jhgan00/ko-sentence-transformers?fbclid=IwAR05X_FSkQWAtIjcL1L-saTUJT5usBGqISKckLl6NdWgprOjboY5JLPNZqc"target="_blank" rel="noopener"> ko-sbert-multitask </Link>
+                                    입니다. 좋은 모델 제공에 감사드립니다!
+                                </Typography>
+                            </Stack>
+                        </Grid>
+
+
                         
                         <Grid item>
                             <Divider />
@@ -257,7 +274,7 @@ export default function LearnMeIntroduce(){
                     <LeftImageIntroduceCard 
                     title ="인공지능을 이용한 챗봇 생성기!"
                     content ="Learn Me!는 BERT라는 구글이 발표한 인공지능 모델을 사용해서 학습해요.
-                    33억개나 되는 단어를 미리 공부한 모델이죠! 이 모델이 여러분의 트윗을 보고 따라할 거에요!"
+                    여러 모델 중 이 모델이 여러분의 트윗을 보고 따라할 거에요!"
                     imageURL="/img/introduce/googleLogo.png"/>
 
                     <RightImageIntroduceCard 
@@ -269,7 +286,7 @@ export default function LearnMeIntroduce(){
 
                     <LeftImageIntroduceCard 
                     title ="개인 정보 보호"
-                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어서 서버에 저장될 예정이에요. 데이터는 챗봇 제외 아무 곳에도 사용되지 않고, 서비스 종료시 일괄 폐기돼요."
+                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어서 서버에 저장될 예정이에요. 데이터는 챗봇 외에 아무 곳에도 사용되지 않지만, 삭제하고 싶은 경우 이 페이지에서 삭제할 수 있어요."
                     imageURL="/img/introduce/secureLogo.png"
                     />
 
