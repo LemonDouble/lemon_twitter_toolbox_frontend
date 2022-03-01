@@ -1,4 +1,4 @@
-import { AppBar, Avatar, Box, IconButton, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
+import { AppBar, Avatar, Box, IconButton, Link, Menu, MenuItem, Toolbar, Tooltip, Typography } from "@mui/material";
 import { useState } from "react";
 import Home from '@mui/icons-material/Home';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { isLoginState } from "../recoil/isLogin";
 import useServerProfile from "../hooks/useServerProfile";
+import useRequestToken from "../hooks/useRequestToken";
+import LoginIcon from '@mui/icons-material/Login';
 
 export interface MenuBarWithoutNotificationProps {
 }
@@ -18,7 +20,7 @@ export default function MenuBarWithoutNotification(){
     const navigate = useNavigate();
     const isLogin = useRecoilValue(isLoginState);
     const profileQuery = useServerProfile(isLogin); 
-
+    const requestTokenQuery = useRequestToken(!isLogin);
 
     const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const UserMenu = [{name : 'My Page', url : '/mypage'}, {name : 'Logout', url : '/logout'}];
@@ -70,7 +72,7 @@ export default function MenuBarWithoutNotification(){
                         </Tooltip>
                 
 
-                        {isLogin && <><Tooltip title="Open User Menu">
+                        {isLogin ? <><Tooltip title="Open User Menu">
                             <IconButton
                             size="large"
                             edge="end"
@@ -106,6 +108,19 @@ export default function MenuBarWithoutNotification(){
                             ))}
                         </Menu>
                         </>
+                        :
+                        <IconButton
+                            size="large"
+                            edge="end"
+                            aria-label="account of current user"
+                            aria-controls={""}
+                            aria-haspopup="true"
+                            color="inherit"
+                            >
+                                <Link href={requestTokenQuery.data?.authentication_url}>
+                                    <LoginIcon />
+                                </Link>
+                        </IconButton>
                         }
                     </Box>
                 </Toolbar>
