@@ -101,8 +101,12 @@ export default function Main(){
                 <DialogContentText id="alert-dialog-description">
                     {`트위터 API 정책에 의해, 하루 ${learnMeCanUseQuery.data?.register_limit}명까지 서비스를 이용할 수 있도록 변경했어요.\n`} <br/>
                     {`더 많은 사람들을 받고 싶지만 이해 부탁드려요 ㅠㅠ`}<br/><br/>
-                    {`현재 이용자 숫자는 ${learnMeCanUseQuery.data?.register_count} / ${learnMeCanUseQuery.data?.register_limit} 명이에요!`}<br/><br/>
-                    {`취미로 만든 프로젝트에, 예상보다 훨씬 많은 관심 주셔서 정말 감사드려요. `}
+                    {`현재 이용자 숫자는 ${learnMeCanUseQuery.data?.register_count} / ${learnMeCanUseQuery.data?.register_limit} 명이에요! 매일 아침 6시에 초기화돼요.`}<br/><br/>
+                    {`취미로 만든 프로젝트에, 예상보다 훨씬 많은 관심 주셔서 정말 감사드려요. `}<br/><br/>
+                    {`아직 베타 버전이고, 개발/유지보수 인력이 혼자라 버그가 있을 수도 있어요.`}<br/>
+                    {`실시간으로 수정 중이지만, 시간이 걸릴 수도 있어요.`}<br/>
+                    {`알려진 버그나 최신 업데이트 소식은`} <Link href="https://twitter.com/lemon_toolbox"
+                    target="_blank" rel="noopener">@lemon_toolbox</Link> {`에서 확인할 수 있어요.`} <br/>
                 </DialogContentText>
                 <DialogActions>
                     <Button onClick={handleClose}> 확인했어요!</Button>

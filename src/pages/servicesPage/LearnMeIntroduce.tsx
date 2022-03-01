@@ -200,9 +200,9 @@ export default function LearnMeIntroduce(){
                                 cooldownStatus.isCooldown ?
                                 <Grid item>
                                     <Stack spacing={1} alignItems="center">
-                                        <Typography variant="h5">이미 최근에 데이터 수집을 실행했어요!</Typography>
+                                        <Typography variant="body1">이미 최근에 데이터 수집을 실행했어요!</Typography>
                                         <Typography variant="h5">
-                                            다음 사용 가능 시간은 {cooldownStatus.cooldownInHours} 시간
+                                            다음 추가 학습 가능 시간은 {cooldownStatus.cooldownInHours} 시간
                                          {cooldownStatus.cooldownInMinutes}분 후에요! </Typography>
                                     </Stack>
                                 </Grid>
