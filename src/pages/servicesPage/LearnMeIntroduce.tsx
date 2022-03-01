@@ -280,6 +280,9 @@ export default function LearnMeIntroduce(){
                     />
 
                 </Stack>
+
+                {/* 서비스에 아직 Footer 없는데, 마지막 컴포넌트가 바닥에 딱 붙으면 보기 좀 그러니까 추가해줌*/}
+                <Grid item lg ={10} md ={10} sm ={10} xs ={10} sx={{height:"100px"}}/>
             </Grid>
         </Grid>
 
