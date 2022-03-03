@@ -286,7 +286,7 @@ export default function LearnMeIntroduce(){
 
                     <LeftImageIntroduceCard 
                     title ="개인 정보 보호"
-                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어서 서버에 저장될 예정이에요. 데이터는 챗봇 외에 아무 곳에도 사용되지 않지만, 삭제하고 싶은 경우 이 페이지에서 삭제할 수 있어요."
+                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어 (AES-256) 서버에 저장될 예정이에요. 데이터는 챗봇 외에 아무 곳에도 사용되지 않지만, 삭제하고 싶은 경우 이 페이지에서 삭제할 수 있어요."
                     imageURL="/img/introduce/secureLogo.png"
                     />
 
