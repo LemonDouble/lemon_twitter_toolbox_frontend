@@ -96,15 +96,15 @@ export default function Main(){
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         >
-            <DialogTitle>{"알림"}</DialogTitle>
+            <DialogTitle>{"베타 서비스 종료 및 정식 서비스 오픈 알림"}</DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    {`트위터 API 정책에 의해, 하루 ${learnMeCanUseQuery.data?.register_limit}명까지 서비스를 이용할 수 있도록 변경했어요.\n`} <br/>
-                    {`더 많은 사람들을 받고 싶지만 이해 부탁드려요 ㅠㅠ`}<br/><br/>
-                    {`현재 이용자 숫자는 ${learnMeCanUseQuery.data?.register_count} / ${learnMeCanUseQuery.data?.register_limit} 명이에요! 매일 아침 6시에 초기화돼요.`}<br/><br/>
-                    {`취미로 만든 프로젝트에, 예상보다 훨씬 많은 관심 주셔서 정말 감사드려요. `}<br/><br/>
-                    {`아직 베타 버전이고, 개발/유지보수 인력이 혼자라 버그가 있을 수도 있어요.`}<br/>
-                    {`실시간으로 수정 중이지만, 시간이 걸릴 수도 있어요.`}<br/>
+                    {`베타 서비스 기간 동안 크리티컬한 버그를 수정하고, 개인정보 처리 방침 등을 강화하여 정식 서비스를 하게 되었어요!`} <br/><br/>
+                    {`여러분의 관심 덕분에 베타 서비스 기간 동안 3519명의 2,727,758 개의 트윗을 처리하였으나, 해당 데이터는 개인정보 처리 방침 동의를 받지 않았으므로 일괄 폐기했어요.`}<br/><br />
+                    {`귀찮게 왜 그렇게까지 하냐고 생각하실수도 있지만, Learn-me 서비스는 여러분의 트윗(개인정보) 를 다루는 서비스이고, 이루다 등의 나쁜 선례가 있는 만큼 관련 부분에서 확실히 하기 위한 노력이라 생각해 주시면 감사할 것 같아요.`} <br/><br/>
+                    {`다시 명시하자면, Learn Me 서비스는 여러분의 데이터를 지금도, 앞으로도 다른 서비스에 활용할 계획이 없으며 개발자 사비로 제공되는 서비스에요.`} <br />
+                    {`분에 넘치는 관심을 주신 만큼, 신뢰로 보답하고 싶어요.`}<br /><br/>
+                    {`오늘의 이용자 숫자는 ${learnMeCanUseQuery.data?.register_count} / ${learnMeCanUseQuery.data?.register_limit} 명이에요! 이용자 제한은 매일 아침 6시에 초기화돼요.`}<br/><br/>
                     {`알려진 버그나 최신 업데이트 소식은`} <Link href="https://twitter.com/lemon_toolbox"
                     target="_blank" rel="noopener">@lemon_toolbox</Link> {`에서 확인할 수 있어요.`} <br/>
                 </DialogContentText>
