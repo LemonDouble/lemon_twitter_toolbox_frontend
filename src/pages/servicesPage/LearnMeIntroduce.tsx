@@ -286,7 +286,7 @@ export default function LearnMeIntroduce(){
 
                     <LeftImageIntroduceCard 
                     title ="개인 정보 보호"
-                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어 (AES-256) 서버에 저장될 예정이에요. 데이터는 챗봇 외에 아무 곳에도 사용되지 않지만, 삭제하고 싶은 경우 이 페이지에서 삭제할 수 있어요."
+                    content = "학습 과정에서 여러분의 트윗을 컴퓨터가 학습할 거에요. 이후 학습한 데이터는 암호화되어 (AES-256) 서버에 저장될 예정이에요. 데이터는 챗봇 외에 아무 곳에도 사용되지 않지만, 삭제하고 싶은 경우 언제든지 이 페이지에서 삭제할 수 있어요."
                     imageURL="/img/introduce/secureLogo.png"
                     />
 
@@ -296,6 +296,10 @@ export default function LearnMeIntroduce(){
                     imageURL="/img/introduce/databaseLogo.png"
                     />
 
+                    <Typography variant="caption">
+                        2022년 3월 3일 기준, 2792명이 2160027개의 트윗을 학습시켰어요!
+                    </Typography>
+
                 </Stack>
 
                 {/* 서비스에 아직 Footer 없는데, 마지막 컴포넌트가 바닥에 딱 붙으면 보기 좀 그러니까 추가해줌*/}
@@ -303,13 +307,15 @@ export default function LearnMeIntroduce(){
             </Grid>
         </Grid>
 
+        
+
         <Dialog
         open={alertOpen}
         onClose={handleAlertClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         >
-            <DialogTitle id="alert-dialog-title">{"트윗 알람 전송 알림"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">ad</DialogTitle>
             <DialogContent>
                 <DialogContentText>
                     트윗 학습은 시간이 조금 걸려요! <br/>
@@ -318,7 +324,7 @@ export default function LearnMeIntroduce(){
             </DialogContent>
             <DialogActions>
                 <Button onClick={handleAlertClose}>거부</Button>
-                <Button onClick={handleServiceAgreeClick} autoFocus>동의 </Button>
+                <Button onClick={handleServiceAgreeClick} autoFocus>동의</Button>
             </DialogActions>
         </Dialog>
         <Snackbar 

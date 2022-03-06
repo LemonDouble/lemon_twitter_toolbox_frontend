@@ -53,7 +53,7 @@ export default function Main(){
             <Grid item xl= {4} lg = {5} md ={5} sm ={10} xs = {10}>
                 <Grid container direction="column" justifyContent="flex-end"  alignItems="flex-end" rowSpacing="10px">
                     <Grid item lg={3}>
-                    <Typography variant="h2"> LEMON TOOLBOX (BETA)</Typography>
+                    <Typography variant="h2"> LEMON TOOLBOX</Typography>
                     </Grid>
                     <Grid item lg={2}>
                     <Typography variant="subtitle1"> 재미있는 여러 트위터 확장 기능을 로그인 한 번에 간편하게</Typography>
