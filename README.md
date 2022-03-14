@@ -1,7 +1,9 @@
-# lemon_twitter_toolbox_backend
+# lemon_twitter_toolbox_Frontend
 
 [![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://www.chromatic.com/builds?appId=61f0008b4e5f6e003a32bd2a)
-
+<p align="center">
+  <img src="https://github.com/LemonDouble/lemon_twitter_toolbox_backend/blob/master/readmeLogo.png" />
+</p>
 React를 사용한 Lemon toolbox의 프론트엔드 서버입니다.
 
 ### 주요 기능들은 다음과 같습니다.
